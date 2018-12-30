@@ -1,6 +1,6 @@
 # flutter_mini_program
 
-A Flutter UI Framework by using HTML + CSS + JS，just like mini-program.
+A Flutter UI Framework by parsing HTML + CSS (inspired by [FlutterHtmlView](https://github.com/PonnamKarthik/FlutterHtmlView)) is used to developing mini-program, just like [WebChat miniprogram](https://developers.weixin.qq.com/miniprogram/dev/framework/MINA.html).
 
 ## Getting Started
 
