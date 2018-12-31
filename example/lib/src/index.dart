@@ -25,8 +25,9 @@ class IndexPage extends Page {
       {"title": "Icon", "subtitle": "图标", "routeName": "/icon"},
       {"title": "Text", "subtitle": "文本", "routeName": "/text"},
       {"title": "Button", "subtitle": "按钮", "routeName": "/button"},
+      {"title": "Checkbox", "subtitle": "复选框", "routeName": "/checkbox"},
       {"title": "Image", "subtitle": "图片", "routeName": "/image"},
-      {"title": "Checkbox", "subtitle": "复选框", "routeName": "/checkbox"}
+      {"title": "Video", "subtitle": "视频", "routeName": "/video"}
     ]
   };
 

@@ -7,6 +7,7 @@ import 'package:flutter_mini_program/tags/IconTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
 import 'package:flutter_mini_program/tags/TextTag.dart';
 import 'package:flutter_mini_program/tags/ImageTag.dart';
+import 'package:flutter_mini_program/tags/VideoTag.dart';
 
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
@@ -40,10 +41,6 @@ class HtmlParser {
         case 'text':
           widgetList.add(new TextTag(page: widget, element: node));
           break;
-        case 'image':
-        case 'img':
-          widgetList.add(new ImageTag(page: widget, element: node));
-          break;
         case 'button':
           widgetList.add(new ButtonTag(page: widget, element: node));
           break;
@@ -52,6 +49,13 @@ class HtmlParser {
           break;
         case 'list-view':
           widgetList.add(new ListViewTag(page: widget, element: node));
+          break;
+        case 'image':
+        case 'img':
+          widgetList.add(new ImageTag(page: widget, element: node));
+          break;
+        case 'video':
+          widgetList.add(new VideoTag(page: widget, element: node));
           break;
         case 'br':
           widgetList.add(new BreakTag(page: widget, element: node));

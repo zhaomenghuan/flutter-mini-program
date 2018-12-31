@@ -6,7 +6,7 @@ A Flutter UI Framework by parsing HTML + CSS, is for developing mini-program, ju
 
 Define Page View：
 
-```
+```html
 <config>
 {
     "navigationBarTitleText": "Flutter 小程序"
@@ -38,7 +38,7 @@ Define Page View：
 
 Define Page Controller：
 
-```
+```dart
 class IndexPage extends Page {
   String url;
   BuildContext mContext;
@@ -74,3 +74,12 @@ class IndexPage extends Page {
   };
 }
 ```
+
+## Supported Tags
+
+- icon
+- text
+- button
+- checkbox
+- image
+- video

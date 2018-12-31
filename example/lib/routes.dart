@@ -6,6 +6,7 @@ import 'package:flutter_mini_program_example/src/icon.dart';
 import 'package:flutter_mini_program_example/src/image.dart';
 import 'package:flutter_mini_program_example/src/index.dart';
 import 'package:flutter_mini_program_example/src/text.dart';
+import 'package:flutter_mini_program_example/src/video.dart';
 
 class Routes {
   static void configureRoutes(Router router) {
@@ -37,17 +38,23 @@ class Routes {
       return new ButtonPage(url: 'assets/page/button.html');
     });
 
+    // Checkbox
+    defineRoute(router, "/checkbox",
+            (BuildContext context, Map<String, List<String>> params) {
+          return new CheckboxPage(url: 'assets/page/checkbox.html');
+        });
+
     // Image
     defineRoute(router, "/image",
         (BuildContext context, Map<String, List<String>> params) {
       return new ImagePage(url: 'assets/page/image.html');
     });
 
-    // Checkbox
-    defineRoute(router, "/checkbox",
-        (BuildContext context, Map<String, List<String>> params) {
-      return new CheckboxPage(url: 'assets/page/checkbox.html');
-    });
+    // Video
+    defineRoute(router, "/video",
+            (BuildContext context, Map<String, List<String>> params) {
+          return new VideoPage(url: 'assets/page/video.html');
+        });
   }
 
   static defineRoute(Router router, String name, HandlerFunc handlerFunc) {
