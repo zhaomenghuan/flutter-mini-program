@@ -63,9 +63,13 @@ class EventEmitter {
 
   /// Post the event [String] and data provider [Function] to the subscriptions.
   void emit(String type, [List arguments]) {
-    var subscribers = events[type];
-    subscribers.forEach((Function target) {
-      (arguments == null) ? target() : target(arguments);
-    });
+    if (events.containsKey(type)) {
+      var subscribers = events[type];
+      if (subscribers.length > 0) {
+        subscribers.forEach((Function target) {
+          (arguments == null) ? target() : target(arguments);
+        });
+      }
+    }
   }
 }
