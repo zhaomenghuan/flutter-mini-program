@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:flutter_mini_program_example/application.dart';
 
 class IndexPage extends Page {
@@ -22,6 +21,7 @@ class IndexPage extends Page {
 
   Map data = {
     "list": [
+      {"title": "View", "subtitle": "视图容器", "routeName": "/view"},
       {"title": "Icon", "subtitle": "图标", "routeName": "/icon"},
       {"title": "Text", "subtitle": "文本", "routeName": "/text"},
       {"title": "Button", "subtitle": "按钮", "routeName": "/button"},

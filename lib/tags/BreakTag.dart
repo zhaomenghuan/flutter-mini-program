@@ -6,8 +6,9 @@ import 'package:html/dom.dart' as dom;
 class BreakTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  BreakTag({this.page, this.element});
+  BreakTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {

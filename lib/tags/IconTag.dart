@@ -7,8 +7,9 @@ import 'package:html/dom.dart' as dom;
 class IconTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  IconTag({this.page, this.element});
+  IconTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {

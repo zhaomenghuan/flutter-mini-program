@@ -1,42 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program/StyleParser.dart';
 import 'package:html/dom.dart' as dom;
 
 /// Builds a [Text] widget from a [dom.Text] element.
 class TextTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  TextTag({this.page, this.element});
+  TextTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {
-    // 解析文本样式
-    Map styleMap = StyleParser.parseStyle(
-        context, this.element.localName, this.element.attributes['style']);
-
-    print(styleMap);
-
     Text textWidget = new Text(this.element.text.trim(),
         style: TextStyle(
-            color: styleMap['color'],
-            fontWeight: styleMap['fontWeight'],
-            fontStyle: styleMap['fontStyle'],
-            decoration: styleMap['textDecoration'],
-            decorationColor: styleMap['textDecorationColor'],
-            decorationStyle: styleMap['textDecorationStyle'],
-            fontSize: styleMap['fontSize'],
-            height: styleMap['height']),
+            color: style['color'],
+            fontWeight: style['fontWeight'],
+            fontStyle: style['fontStyle'],
+            decoration: style['textDecoration'],
+            decorationColor: style['textDecorationColor'],
+            decorationStyle: style['textDecorationStyle'],
+            fontSize: style['fontSize'],
+            height: style['height']),
         softWrap: true,
-        textAlign: styleMap['textAlign'],
-        textDirection: styleMap['textDirection'],
+        textAlign: style['textAlign'],
+        textDirection: style['direction'],
         overflow: TextOverflow.clip);
-    if (styleMap['display'] == 'block') {
+    if (style['display'] == 'block') {
       return Row(
         children: <Widget>[textWidget],
       );
-    } else if (styleMap['display'] == 'inline') {
+    } else if (style['display'] == 'inline') {
       return textWidget;
     }
   }

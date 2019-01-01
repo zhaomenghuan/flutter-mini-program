@@ -10,8 +10,9 @@ import 'package:html/dom.dart' as dom;
 class ImageTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  ImageTag({this.page, this.element});
+  ImageTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {

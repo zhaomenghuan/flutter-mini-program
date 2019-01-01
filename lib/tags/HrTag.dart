@@ -6,8 +6,9 @@ import 'package:html/dom.dart' as dom;
 class HrTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  HrTag({this.page, this.element});
+  HrTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {

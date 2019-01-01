@@ -7,8 +7,9 @@ import 'package:html/dom.dart' as dom;
 class CheckboxTag extends StatefulWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  CheckboxTag({this.page, this.element});
+  CheckboxTag({this.page, this.element, this.style});
 
   @override
   State<CheckboxTag> createState() => CheckboxTagState();

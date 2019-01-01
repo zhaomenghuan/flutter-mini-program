@@ -6,8 +6,9 @@ import 'package:html/dom.dart' as dom;
 class ButtonTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  ButtonTag({this.page, this.element});
+  ButtonTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {

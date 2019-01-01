@@ -6,8 +6,9 @@ import 'package:html/dom.dart' as dom;
 class ListViewTag extends StatefulWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  ListViewTag({this.page, this.element});
+  ListViewTag({this.page, this.element, this.style});
 
   @override
   State<StatefulWidget> createState() => ListViewTagState();

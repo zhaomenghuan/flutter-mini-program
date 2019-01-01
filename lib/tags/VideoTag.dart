@@ -7,8 +7,9 @@ import 'package:video_player/video_player.dart';
 class VideoTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
+  final Map style;
 
-  VideoTag({this.page, this.element});
+  VideoTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {

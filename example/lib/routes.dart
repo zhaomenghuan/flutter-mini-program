@@ -16,9 +16,14 @@ class Routes {
       return new Container(width: 0.0, height: 0.0);
     });
 
-    // 首页
+    // Home
     defineRoute(router, "/", (BuildContext context, Map<String, List<String>> params) {
       return new IndexPage(url: 'assets/page/index.html');
+    });
+
+    // View
+    defineRoute(router, "/view", (BuildContext context, Map<String, List<String>> params) {
+      return new IconPage(url: 'assets/page/view.html');
     });
 
     // Icon

@@ -7,15 +7,15 @@ import 'package:html/dom.dart' as dom;
 class ViewTag extends StatelessWidget {
   final Page page;
   final dom.Node element;
+  final Map style;
 
-  ViewTag({this.page, this.element});
+  ViewTag({this.page, this.element, this.style});
 
   @override
   Widget build(BuildContext context) {
     HtmlParser htmlParser = new HtmlParser();
     List<Widget> widgetList = new List();
     List<dom.Node> nodes = element.children;
-    double padding = 0.0;
 
     if (nodes.isEmpty) {
       return new Container(height: 0.0, width: 0.0);
@@ -24,14 +24,40 @@ class ViewTag extends StatelessWidget {
     if (nodes.length == 1) {
       htmlParser.parseChildren(page, nodes.single, widgetList);
     } else {
-      nodes.forEach(
-          (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
+      nodes.forEach((dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
     }
 
     return Container(
-      margin: EdgeInsets.only(top: 0),
-      padding: EdgeInsets.all(padding),
+      alignment: parseAlignment(),
+      margin: style['margin'],
+      padding: style['padding'],
       child: Wrap(children: widgetList),
     );
+  }
+
+  Alignment parseAlignment() {
+    var alignment = element.attributes['alignment'];
+    switch(alignment) {
+      case 'topLeft':
+        return  Alignment.topLeft;
+      case 'topCenter':
+        return  Alignment.topCenter;
+      case 'topRight':
+        return  Alignment.topRight;
+      case 'centerLeft':
+        return  Alignment.centerLeft;
+      case 'center':
+        return  Alignment.center;
+      case 'centerRight':
+        return  Alignment.centerRight;
+      case 'centerRight':
+        return  Alignment.bottomLeft;
+      case 'centerRight':
+        return  Alignment.bottomCenter;
+      case 'centerRight':
+        return  Alignment.bottomRight;
+      default:
+        return Alignment.topLeft;
+    }
   }
 }

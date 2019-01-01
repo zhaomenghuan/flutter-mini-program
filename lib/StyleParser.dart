@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_program/Page.dart';
+import 'package:html/dom.dart' as dom;
 import 'package:csslib/parser.dart' as css;
 import 'package:csslib/visitor.dart';
 
 class StyleParser {
-  static const simpleOptionsWithCheckedAndWarningsAsErrors =
-      const css.PreprocessorOptions(
-          useColors: true,
-          verbose: true,
-          checked: true,
-          warningsAsErrors: true,
-          polyfill: true,
-          inputFile: 'memory');
-
   /**
    * Spin-up CSS parser in checked mode to detect any problematic CSS.  Normally,
    * CSS will allow any property/value pairs regardless of validity; all of our
@@ -22,7 +15,13 @@ class StyleParser {
       css.parse(cssInput,
           errors: errors,
           options: opts == null
-              ? simpleOptionsWithCheckedAndWarningsAsErrors
+              ? css.PreprocessorOptions(
+                  useColors: true,
+                  verbose: true,
+                  checked: true,
+                  warningsAsErrors: true,
+                  polyfill: true,
+                  inputFile: 'memory')
               : opts);
 
   static formatCss(String cssInput) {
@@ -35,16 +34,59 @@ class StyleParser {
     StyleSheet styleSheet = parseCss(cssInput);
     Map styleSheetMap = new Map();
     for (RuleSet ruleSet in styleSheet.topLevels) {
-      Map declarationGroup = new Map();
+      String selectorName = ruleSet.selectorGroup.span.text;
+      Map declarationMap = new Map();
       for (var declaration in ruleSet.declarationGroup.declarations) {
         List<String> declarationTextSpan = declaration.span.text.split(':');
         String property = declarationTextSpan[0].trim();
         String value = declarationTextSpan[1].trim();
-        declarationGroup[property] = value;
+        declarationMap[property] = value;
       }
-      styleSheetMap[ruleSet.selectorGroup.span.text] = declarationGroup;
+      styleSheetMap[selectorName] = declarationMap;
     }
     return styleSheetMap;
+  }
+
+  /// Parse Class Attribute
+  static Map parseClassAttribute(Page page, dom.Node node, Map nodeStyles) {
+    if (node is dom.Element) {
+      if (page.style != null && node.classes != null) {
+        node.classes.forEach((name) {
+          Map declarationMap = page.style['.$name'];
+          if (declarationMap != null) {
+            declarationMap.forEach((property, value) {
+              nodeStyles[property] = value;
+            });
+          }
+        });
+      }
+    }
+    return nodeStyles;
+  }
+
+  // Parse Style Attribute
+  static Map parseStyleAttribute(dom.Node node, Map nodeStyles) {
+    RegExp _style = new RegExp(r'([a-zA-Z\-]+)\s*:\s*([^;]*)');
+    var styleText = node.attributes['style'];
+    if (styleText != null) {
+      Iterable<Match> matches = _style.allMatches(styleText);
+      for (Match match in matches) {
+        String property = match[1].trim();
+        String value = match[2].trim();
+        nodeStyles[property] = value;
+      }
+    }
+    return nodeStyles;
+  }
+
+  // Parse Node Tag Style
+  static Map parseTagStyleSheet(Page page, dom.Node node) {
+    Map nodeStyles = {};
+    // 1. Class Attribute
+    parseClassAttribute(page, node, nodeStyles);
+    // 2. Style Attribute
+    parseStyleAttribute(node, nodeStyles);
+    return nodeStyles;
   }
 
   ///
@@ -78,130 +120,116 @@ class StyleParser {
   /// fontFamily: 字体
   ///
   ///
-  static Map parseStyle(BuildContext context, String tag, String style) {
-    Map styleMap = new Map();
-
-    List _blockTags = const ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
-    RegExp _style = new RegExp(r'([a-zA-Z\-]+)\s*:\s*([^;]*)');
+  static Map parseTagStyleDeclaration(Page page, dom.Element node) {
+    Map styleDeclaration = {};
+    List _blockTags = const ['view', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p'];
+    String tag = node.localName;
+    Map nodeStyles = parseTagStyleSheet(page, node);
 
     // BlockTags
     if (_blockTags.contains(tag)) {
-      styleMap['display'] = 'block';
+      styleDeclaration['display'] = 'block';
     } else {
-      styleMap['display'] = 'inline';
+      styleDeclaration['display'] = 'inline';
     }
 
     switch (tag) {
       case 'h1':
-        styleMap['fontSize'] = 32.0;
+        styleDeclaration['fontSize'] = 32.0;
         break;
       case 'h2':
-        styleMap['fontSize'] = 24.0;
+        styleDeclaration['fontSize'] = 24.0;
         break;
       case 'h3':
-        styleMap['fontSize'] = 20.0;
+        styleDeclaration['fontSize'] = 20.0;
         break;
       case 'h4':
-        styleMap['fontSize'] = 16.0;
+        styleDeclaration['fontSize'] = 16.0;
         break;
       case 'h5':
-        styleMap['fontSize'] = 12.8;
+        styleDeclaration['fontSize'] = 12.8;
         break;
       case 'h6':
-        styleMap['fontSize'] = 11.2;
+        styleDeclaration['fontSize'] = 11.2;
         break;
       case 'a':
-        styleMap['textDecoration'] = TextDecoration.underline;
-        styleMap['color'] = parseColor("#1965B5");
+        styleDeclaration['textDecoration'] = TextDecoration.underline;
+        styleDeclaration['color'] = parseColor("#1965B5");
         break;
       case 'b':
       case 'strong':
-        styleMap['fontWeight'] = FontWeight.bold;
+        styleDeclaration['fontWeight'] = FontWeight.bold;
         break;
       case 'i':
       case 'em':
-        styleMap['fontStyle'] = FontStyle.italic;
+        styleDeclaration['fontStyle'] = FontStyle.italic;
         break;
       case 'u':
-        styleMap['textDecoration'] = TextDecoration.underline;
+        styleDeclaration['textDecoration'] = TextDecoration.underline;
         break;
     }
 
-    // style 属性
-    if (style != null) {
-      Iterable<Match> matches = _style.allMatches(style);
-      for (Match match in matches) {
-        String param = match[1].trim();
-        String value = match[2].trim();
-
-        switch (param) {
+    if (nodeStyles != null) {
+      for (var property in nodeStyles.keys) {
+        String value = nodeStyles[property];
+        switch (property) {
           case 'display':
-            styleMap['display'] = value;
+            styleDeclaration['display'] = value;
             break;
           case 'margin':
-            styleMap['margin'] = parseMargin(value);
+            styleDeclaration['margin'] = parseMargin(value);
+            break;
+          case 'padding':
+            styleDeclaration['padding'] = parsePadding(value);
             break;
           case 'color':
-            styleMap['color'] = parseColor(value);
+            styleDeclaration['color'] = parseColor(value);
             break;
           case 'background-color':
-            styleMap['backgroundColor'] = parseColor(value);
+            styleDeclaration['backgroundColor'] = parseColor(value);
             break;
           case 'font-weight':
-            styleMap['fontWeight'] = parseFontWeight(value);
+            styleDeclaration['fontWeight'] = parseFontWeight(value);
             break;
           case 'font-style':
-            styleMap['fontStyle'] =
-                (value == 'italic') ? FontStyle.italic : FontStyle.normal;
+            styleDeclaration['fontStyle'] = parseFontStyle(value);
             break;
           case 'font-size':
-            value = value.replaceAll('px', '').trim();
-            styleMap['fontSize'] = double.parse(value);
+            styleDeclaration['fontSize'] = parsePxSize(value);
             break;
           case 'text-decoration':
-            styleMap['textDecoration'] = parseTextDecoration(value);
+            styleDeclaration['textDecoration'] = parseTextDecoration(value);
             break;
           case 'text-decoration-color':
-            styleMap['textDecorationColor'] = parseColor(value);
+            styleDeclaration['textDecorationColor'] = parseColor(value);
             break;
           case 'text-decoration-style':
-            styleMap['textDecorationStyle'] = parseTextDecorationStyle(value);
+            styleDeclaration['textDecorationStyle'] = parseTextDecorationStyle(value);
             break;
           case 'text-align':
-            styleMap['textAlign'] = parseTextAlign(value);
+            styleDeclaration['textAlign'] = parseTextAlign(value);
             break;
           case 'direction':
-            styleMap['textDirection'] =
-                (value == 'ltr') ? TextDirection.ltr : TextDirection.rtl;
+            styleDeclaration['direction'] = parseTextDirection(value);
             break;
         }
       }
     }
 
-    return styleMap;
+    return styleDeclaration;
   }
 
-  /// 解析文本对齐方式
-  static TextAlign parseTextAlign(String textAlign) {
-    switch (textAlign) {
-      case 'left':
-        return TextAlign.left;
-      case 'right':
-        return TextAlign.right;
-      case 'center':
-        return TextAlign.center;
-      case 'justify':
-        return TextAlign.justify;
-      case 'start':
-        return TextAlign.start;
-      case 'end':
-        return TextAlign.end;
-    }
+  static parseMargin(String value) {
+    value = value.replaceAll('px', '').trim();
+    return EdgeInsets.only(top: double.parse(value));
   }
 
-  static parseMargin(String value) {}
+  static parsePadding(String value) {
+    value = value.replaceAll('px', '').trim();
+    return EdgeInsets.all(double.parse(value));
+  }
 
-  /// 解析颜色
+  /// Parse Color
   static parseColor(String value) {
     Color color;
     RegExp colorRegExp = new RegExp(r'^#([a-fA-F0-9]{6})$');
@@ -212,7 +240,18 @@ class StyleParser {
     return color;
   }
 
-  /// 解析字体粗细程度
+  /// Parse Size
+  static parsePxSize(String value) {
+    value = value.replaceAll('px', '').trim();
+    return double.parse(value);
+  }
+
+  /// [font-style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)
+  static FontStyle parseFontStyle(String value) {
+    return (value == 'italic') ? FontStyle.italic : FontStyle.normal;
+  }
+
+  /// [font-weight](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight]
   static FontWeight parseFontWeight(String fontWeight) {
     switch (fontWeight) {
       case 'normal':
@@ -240,7 +279,26 @@ class StyleParser {
     }
   }
 
-  /// 解析文本修饰 —— [text-decoration](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration)
+  /// [text-align](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align)
+  /// TODO: Temporarily not effective
+  static TextAlign parseTextAlign(String textAlign) {
+    switch (textAlign) {
+      case 'left':
+        return TextAlign.left;
+      case 'right':
+        return TextAlign.right;
+      case 'center':
+        return TextAlign.center;
+      case 'justify':
+        return TextAlign.justify;
+      case 'start':
+        return TextAlign.start;
+      case 'end':
+        return TextAlign.end;
+    }
+  }
+
+  /// [text-decoration](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration)
   static TextDecoration parseTextDecoration(String textDecoration) {
     switch (textDecoration) {
       // 默认, 定义标准的文本
@@ -262,7 +320,7 @@ class StyleParser {
     }
   }
 
-  /// 设定线的样式 —— [text-decoration-style](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style)
+  /// [text-decoration-style](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style)
   static TextDecorationStyle parseTextDecorationStyle(
       String textDecorationStyle) {
     switch (textDecorationStyle) {
@@ -282,5 +340,10 @@ class StyleParser {
         return TextDecorationStyle.wavy;
         break;
     }
+  }
+
+  /// [direction](https://developer.mozilla.org/en-US/docs/Web/CSS/direction)
+  static TextDirection parseTextDirection(String value) {
+    return (value == 'ltr') ? TextDirection.ltr : TextDirection.rtl;
   }
 }
