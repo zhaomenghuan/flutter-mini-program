@@ -3,31 +3,35 @@ import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/HtmlParser.dart';
 import 'package:html/dom.dart' as dom;
 
+// https://flutter.io/docs/development/ui/widgets/layout
 class ViewTag extends StatelessWidget {
-  final Page widget;
-  final List<dom.Node> nodes;
+  final Page page;
+  final dom.Node element;
 
-  ViewTag({this.widget, this.nodes});
+  ViewTag({this.page, this.element});
 
   @override
   Widget build(BuildContext context) {
     HtmlParser htmlParser = new HtmlParser();
     List<Widget> widgetList = new List();
+    List<dom.Node> nodes = element.children;
+    double padding = 0.0;
 
     if (nodes.isEmpty) {
       return new Container(height: 0.0, width: 0.0);
     }
 
     if (nodes.length == 1) {
-      return htmlParser.parseChildren(widget, nodes.single, widgetList);
+      htmlParser.parseChildren(page, nodes.single, widgetList);
+    } else {
+      nodes.forEach(
+          (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
     }
 
-    nodes.forEach(
-        (dom.Node node) => htmlParser.parseChildren(widget, node, widgetList));
-    return SingleChildScrollView(
-      child: Wrap(
-        children: widgetList,
-      ),
+    return Container(
+      margin: EdgeInsets.only(top: 0),
+      padding: EdgeInsets.all(padding),
+      child: Wrap(children: widgetList),
     );
   }
 }

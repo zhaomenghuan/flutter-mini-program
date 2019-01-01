@@ -5,8 +5,35 @@
 </config>
 
 <template>
-    <view>
+    <view style="padding: 20px;">
+        <h3>基本演示</h3>
         <!--文本-->
-        <text style="color: #FF0000;font-size: 30px;">文本</text>
+        <text>普通文本</text>
+        <text style="color: #0000FF;font-size: 20px;font-weight: bold;background-color:#ff0000;">加样式的文本</text>
+        <text style="text-decoration: underline;text-decoration-style: solid;text-decoration-color: #ff0000;">
+            设置 text-decoration: underline 的文本
+        </text>
+        <p style="text-decoration: line-through;">废弃的 API </p>
+
+        <!--标题-->
+        <h1 style="text-align: right;">Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 3</h4>
+        <h5>Heading 3</h5>
+        <h6>Heading 3</h6>
+
+        <!-- Link(链接) -->
+        <a href="https://flutter.io">https://flutter.io</a>
+
+        <h3> style 属性支持</h3>
+        <p>display：inline | block </p>
+        <p>color："#RRGGBB"格式字符串 </p>
+        <p>direction: ltr | rtl</p>
+        <p>text-decoration：none | underline | overline | line-through </p>
+        <p>text-decoration-color: "#RRGGBB"格式字符串 </p>
+        <p>text-decoration-style: solid | double | dotted | dashed | wavy </p>
+        <p>font-weight: normal | bold | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900</p>
+        <p>font-style: normal | italic</p>
     </view>
 </template>

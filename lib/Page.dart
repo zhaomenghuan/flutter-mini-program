@@ -11,6 +11,13 @@ abstract class Page extends StatefulWidget {
   EventEmitter emitter;
   Widget view;
   String content;
+
+  // Config Tag
+  Map config = {};
+
+  // Style Tag
+  Map style = {};
+
   Map data = {};
   Map<String, Function> methods;
 
@@ -20,7 +27,6 @@ abstract class Page extends StatefulWidget {
 
   @override
   PageState createState() => PageState();
-
 
   Map getData() {
     return data;
@@ -63,7 +69,8 @@ class PageState extends State<Page> {
 
   void parseContent() async {
     try {
-      widget.content = await ResourceUtil.loadStringFromAssetFile(context, widget.url);
+      widget.content =
+          await ResourceUtil.loadStringFromAssetFile(context, widget.url);
       setState(() {
         widget.view = PageParser.parse(widget.content, widget);
       });

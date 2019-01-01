@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
+import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:flutter_mini_program_example/application.dart';
 
 class IndexPage extends Page {
@@ -16,7 +17,6 @@ class IndexPage extends Page {
     print(page.emitter);
     print(page.view);
     print(Application.router);
-
     page.emitter.on('lifecycle', () => print('监听'));
   }
 

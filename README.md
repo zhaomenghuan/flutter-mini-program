@@ -9,7 +9,7 @@ Define Page View：
 ```html
 <config>
 {
-    "navigationBarTitleText": "Flutter 小程序"
+    "navigationBarTitleText": "Flutter MiniProgram"
 }
 </config>
 
@@ -77,9 +77,14 @@ class IndexPage extends Page {
 
 ## Supported Tags
 
-- icon
-- text
-- button
-- checkbox
-- image
-- video
+- view/div: 视图容器
+- icon：图标
+- text：文本
+- button：按钮
+- checkbox：复选框
+- image：图片
+- video：视频
+- br：换行符
+- hr：水平分隔线
+- p: 段落
+- h1 ~ h6: 标题

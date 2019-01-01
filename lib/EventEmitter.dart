@@ -1,53 +1,71 @@
 class EventEmitter {
-  final _subscriptions = new Map<String, List<Function>>();
+  Map<String, List<Function>> events;
+
+  EventEmitter() {
+    events = new Map<String, List<Function>>();
+  }
 
   // Return the number of events that have been subscribed to.
   int get eventCount {
-    return _subscriptions.keys.length;
+    return events.keys.length;
   }
 
   /// Return the total number of subscriptions.
   int get subscriptionCount {
     var count = 0;
-    _subscriptions.keys.forEach((String key) {
-      count = count + _subscriptions[key].length;
+    events.keys.forEach((String key) {
+      count = count + events[key].length;
     });
     return count;
   }
 
   /// Subscribe a target to an event.
-  void on(String event, Function target) {
-    var subscribers;
-    if (_subscriptions.containsKey(event)) {
-      subscribers = _subscriptions[event];
+  void on(String type, Function listener) {
+    List subscribers = new List();
+    if (events.containsKey(type)) {
+      subscribers = events[type];
     } else {
       subscribers = new List<Function>();
-      _subscriptions[event] = subscribers;
+      events[type] = subscribers;
     }
-    subscribers.add(target);
+    subscribers.add(listener);
+  }
+
+  void once(String type, Function listener) {
+    bool fired = false;
+
+    Function onceWrapper([List arguments]) {
+      if (!fired) {
+        fired = true;
+        (arguments == null) ? listener() : listener(arguments);
+      }
+    }
+
+    this.on(type, onceWrapper);
+  }
+
+  /// Unsubscribe a target to an event.
+  bool off(String type, Function listener) {
+    if (!events.containsKey(type)) {
+      return false;
+    }
+    List subscribers = events[type];
+    for (var i = 0; i < subscribers.length; i++) {
+      Function target = subscribers[i];
+      if (identical(target, listener)) {
+        subscribers.remove(target);
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /// Post the event [String] and data provider [Function] to the subscriptions.
-  void emit(String event, [Function dataProvider = null]) {
-    if (_subscriptions.containsKey(event)) {
-      var subscribers = _subscriptions[event];
-
-      subscribers.forEach((Function target) {
-        dataProvider == null ? target() : target(dataProvider);
-      });
-    }
-  }
-
-  /// Display a simple report of subscriptions to STDOUT.
-  void report() {
-    print(
-        "Active $subscriptionCount subscription(s) for $eventCount event(s).");
-    _subscriptions.keys.forEach((String key) {
-      var subscribers = _subscriptions[key];
-      subscribers.forEach((Function target) {
-        print("\t ['$key'] - $target");
-      });
+  void emit(String type, [List arguments]) {
+    var subscribers = events[type];
+    subscribers.forEach((Function target) {
+      (arguments == null) ? target() : target(arguments);
     });
-    print('\n');
   }
 }

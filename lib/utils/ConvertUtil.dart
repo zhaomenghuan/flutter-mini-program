@@ -3,23 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
 class ConvertUtil {
-  /**
-   * var a = false;
-   * var aa = ConvertUtil.parseValue("a", isBool: true);
-   * print(aa == false); // true
-   */
-
-  /// Convert value to real dynamic type value.
-  static dynamic parseValue(String value, {isBool = false}) {
-    dynamic realValue;
-    if (isBool) {
-      realValue = bool.fromEnvironment(value);
-    } else {
-      realValue = value.trim();
-      realValue = "{ 'value': ${realValue} }".replaceAll(r"'", "\"");
-      realValue = json.decode(realValue)['value'];
+  /// Convert the value of String type to the value of dynamic type.
+  ///
+  /// Example:
+  ///
+  /// var aa = ConvertUtil.parseValue("'string'");
+  /// print(aa == 'string'); // true
+  ///
+  /// var bb = ConvertUtil.parseValue("123");
+  /// print(bb == 123); // true
+  ///
+  /// var cc = ConvertUtil.parseValue("false");
+  /// print(cc == false); // true
+  ///
+  /// Map map = {
+  ///    "type": 'string'
+  /// };
+  /// var dd = ConvertUtil.parseValue('type', map);
+  /// print(dd);
+  ///
+  static parseValue(dynamic value, [dynamic global]) {
+    if (value.runtimeType == String) {
+      if (value == "true") return true;
+      if (value == "false") return false;
+      dynamic realValue = value.trim();
+      try {
+        realValue = "{'value':${realValue}}".replaceAll(r"'", "\"");
+        realValue = json.decode(realValue)['value'];
+      } catch (e) {
+        realValue = (global is Map) ? global[value] : null;
+      }
+      return realValue;
     }
-    return realValue;
+    return value;
   }
 
   static Map parseFunction(String input) {

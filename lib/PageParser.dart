@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/HtmlParser.dart';
-
+import 'package:flutter_mini_program/StyleParser.dart';
 import 'package:html/dom.dart' as dom;
 
 class PageParser {
-  /**
-   * 解析 HTML 文件
-   */
-  static Widget parse(String html, Page widget) {
+  /// Parse HTML Page
+  static Widget parse(String html, Page page) {
     List<Widget> widgetList = new List();
     HtmlParser htmlParser = new HtmlParser();
     dom.Document document = htmlParser.parseHTML(html);
@@ -18,33 +16,31 @@ class PageParser {
 
     // config
     dom.Node configNode = docBody.getElementsByTagName("config").first;
-    var pageConfig = json.decode(configNode.text);
+    page.config = json.decode(configNode.text);
+
+    // style
+    List<dom.Element> styleElements = docBody.getElementsByTagName("style");
+    if (styleElements.length > 0) {
+      dom.Element styleElement = styleElements.first;
+      page.style = StyleParser.visitStyleSheet(styleElement.text);
+    }
 
     // template
     dom.Element templateElement =
         docBody.getElementsByTagName("template").first;
     List<dom.Node> templateChildren = templateElement.children;
     if (templateChildren.length > 0) {
-      templateChildren.forEach((dom.Node node) =>
-          htmlParser.parseChildren(widget, node, widgetList));
+      templateChildren.forEach(
+          (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
     }
 
-    // script
-    // dom.Node scriptNode = docBody.getElementsByTagName("script").first;
-    // print(scriptNode.text);
-
-    // style
-    List<dom.Element> styleElements = docBody.getElementsByTagName("style");
-    if (styleElements.length > 0) {
-      for (int i = 0; i < styleElements.length; i++) {
-        docBody.getElementsByTagName("style").first.remove();
-      }
+    // Title
+    String title = "";
+    if (page.config != null && page.config.containsKey("navigationBarTitleText")) {
+      title = page.config['navigationBarTitleText'];
     }
-
     return new Scaffold(
-        appBar: AppBar(
-            title: Text(pageConfig['navigationBarTitleText']),
-            centerTitle: true),
+        appBar: AppBar(title: Text(title), centerTitle: true),
         body: SingleChildScrollView(child: Wrap(children: widgetList)));
   }
 }
