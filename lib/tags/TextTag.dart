@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
+import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:html/dom.dart' as dom;
 
 /// Builds a [Text] widget from a [dom.Text] element.
@@ -12,7 +13,10 @@ class TextTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Text textWidget = new Text(this.element.text.trim(),
+    String text = element.text.trim();
+    text = ConvertUtil.compileTemplateString(text, page.data);
+
+    Text textWidget = new Text(text,
         style: TextStyle(
             color: style['color'],
             fontWeight: style['fontWeight'],

@@ -7,7 +7,7 @@ class CheckboxPage extends Page {
   CheckboxPage({this.url});
 
   @override
-  void onCreate(BuildContext context, Page widget) {
-    print(widget.url);
+  void onCreate(BuildContext context, Page page) {
+    print(page.url);
   }
 }

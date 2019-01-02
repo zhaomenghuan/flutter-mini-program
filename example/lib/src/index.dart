@@ -18,18 +18,6 @@ class IndexPage extends Page {
 //    page.emitter.on('lifecycle', () => print('监听'));
   }
 
-  Map data = {
-    "list": [
-      {"title": "View", "subtitle": "视图容器", "link": "/view"},
-      {"title": "Icon", "subtitle": "图标", "link": "/icon"},
-      {"title": "Text", "subtitle": "文本", "link": "/text"},
-      {"title": "Button", "subtitle": "按钮", "link": "/button"},
-      {"title": "Checkbox", "subtitle": "复选框", "link": "/checkbox"},
-      {"title": "Image", "subtitle": "图片", "link": "/image"},
-      {"title": "Video", "subtitle": "视频", "link": "/video"}
-    ]
-  };
-
   Map<String, Function> get methods => {
     "openPage": (String path) {
       Application.navigateTo(mContext, path);

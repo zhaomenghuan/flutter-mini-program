@@ -8,8 +8,8 @@ class ImagePage extends Page {
   ImagePage({this.url});
 
   @override
-  void onCreate(BuildContext context, Page widget) {
+  void onCreate(BuildContext context, Page page) {
     mContext = context;
-    print(widget.url);
+    print(page.url);
   }
 }

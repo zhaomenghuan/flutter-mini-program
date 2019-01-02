@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
 
-/// Creates a line break from a template <br/> tag.
-// http://flutter.link/2018/03/26/Input%20and%20selection/
+/// Creates a line break from a template <checkbox> tag.
 class CheckboxTag extends StatefulWidget {
   final Page page;
   final dom.Element element;

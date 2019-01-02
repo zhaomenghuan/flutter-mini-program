@@ -4,21 +4,24 @@ import 'package:flutter_mini_program/Page.dart';
 class ViewPage extends Page {
   String url;
   BuildContext mContext;
+  Page mPage;
 
   ViewPage({this.url});
 
   @override
-  void onCreate(BuildContext context, Page widget) {
+  void onCreate(BuildContext context, Page page) {
     mContext = context;
-    print(widget.url);
+    mPage = page;
+    print(page.url);
+    page.data = {"message": "Hello Flutter MiniProgram"};
   }
 
   Map<String, Function> get methods => {
-    "topLeftOnTap": () {
-      print("topLeft onTap");
-    },
-    "topLeftOnLongTap": () {
-      print("topLeft onLongTap");
-    }
-  };
+        "topLeftOnTap": () {
+          print("topLeft onTap");
+        },
+        "topLeftOnLongTap": () {
+          print("topLeft onLongTap");
+        }
+      };
 }

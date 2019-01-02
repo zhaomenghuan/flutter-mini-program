@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
 
-/// Builds a icon from a <icon> tag.
+/// Builds a icon from a <button> tag.
 class ButtonTag extends StatelessWidget {
   final Page page;
   final dom.Element element;
@@ -14,9 +14,9 @@ class ButtonTag extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(element.localName == 'button');
 
-    String text = this.element.text;
-    var attributes = this.element.attributes;
-    var onclick = attributes['onclick'];
+    String text = element.text;
+    var attributes = element.attributes;
+    var onTap = attributes['ontap'];
 
     switch (attributes['type']) {
       case 'close':
@@ -25,7 +25,7 @@ class ButtonTag extends StatelessWidget {
         return new BackButton();
       case 'floating-action':
         return new FloatingActionButton(onPressed: () {
-          page.invoke(onclick);
+          page.invoke(onTap);
         });
         break;
       case 'icon':
@@ -33,7 +33,7 @@ class ButtonTag extends StatelessWidget {
             icon: Icon(Icons.ac_unit),
             tooltip: text,
             onPressed: () {
-              page.invoke(onclick);
+              page.invoke(onTap);
             });
         break;
       case 'flat':
@@ -46,7 +46,7 @@ class ButtonTag extends StatelessWidget {
             child: new Text(text),
             // 扁平化按钮
             onPressed: () {
-              page.invoke(onclick);
+              page.invoke(onTap);
             });
         break;
       case 'raised':
@@ -59,14 +59,14 @@ class ButtonTag extends StatelessWidget {
             splashColor: Colors.blueGrey,
             child: new Text(text),
             onPressed: () {
-              page.invoke(onclick);
+              page.invoke(onTap);
             });
         break;
       case 'raw-material':
         return new RawMaterialButton(
             child: new Text(text),
             onPressed: () {
-              page.invoke(onclick);
+              page.invoke(onTap);
             });
     }
   }

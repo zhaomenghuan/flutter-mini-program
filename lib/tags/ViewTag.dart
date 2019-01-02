@@ -21,12 +21,7 @@ class ViewTag extends StatelessWidget {
       return new Container(height: 0.0, width: 0.0);
     }
 
-    if (nodes.length == 1) {
-      htmlParser.parseChildren(page, nodes.single, widgetList);
-    } else {
-      nodes.forEach(
-          (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
-    }
+    nodes.forEach((dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
 
     var attributes = element.attributes;
     var onTap = attributes['ontap'];
@@ -34,14 +29,10 @@ class ViewTag extends StatelessWidget {
 
     return GestureDetector(
         onTap: () {
-          if (onTap != null) {
-            page.invoke(onTap);
-          }
+          page.invoke(onTap);
         },
         onLongPress: () {
-          if (onLongTap != null) {
-            page.invoke(onLongTap);
-          }
+          page.invoke(onLongTap);
         },
         child: Container(
             alignment: parseAlignment(),

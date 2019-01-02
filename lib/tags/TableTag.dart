@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
 
-/// Creates a line break from a template <br/> tag.
+/// Creates a line break from a template <table> tag.
 class TableTag extends StatelessWidget {
   final Page page;
   final dom.Element element;

@@ -7,10 +7,10 @@ class ButtonPage extends Page {
   ButtonPage({this.url});
 
   @override
-  void onCreate(BuildContext context, Page widget) {
-    print(widget.url);
-//    print(widget.emitter);
-//    print(widget.view);
-//    widget.emitter.on('lifecycle', () => print('监听'));
+  void onCreate(BuildContext context, Page page) {
+//    print(page.url);
+//    print(page.emitter);
+//    print(page.view);
+//    page.emitter.on('lifecycle', () => print('监听'));
   }
 }

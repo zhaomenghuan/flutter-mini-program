@@ -18,7 +18,10 @@ abstract class Page extends StatefulWidget {
   // Style Tag
   Map style = {};
 
+  // Data
   Map data = {};
+
+  // Methods
   Map<String, Function> methods;
 
   Page({this.url}) {
@@ -28,18 +31,18 @@ abstract class Page extends StatefulWidget {
   @override
   PageState createState() => PageState();
 
-  Map getData() {
-    return data;
-  }
-
   void onCreate(BuildContext context, Page page);
 
   void invoke(String functionTag) {
-    Map methodMap = ConvertUtil.parseFunction(functionTag);
-    String name = methodMap['name'];
-    List arguments = methodMap['arguments'];
-    Function callback = methods[name];
-    Function.apply(callback, arguments);
+    if (functionTag != null) {
+      Map methodMap = ConvertUtil.parseFunction(functionTag);
+      String name = methodMap['name'];
+      List arguments = methodMap['arguments'];
+      if (methods != null && methods.containsKey(name)) {
+        Function callback = methods[name];
+        Function.apply(callback, arguments);
+      }
+    }
   }
 }
 

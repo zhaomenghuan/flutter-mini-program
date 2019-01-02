@@ -8,8 +8,8 @@ class TextPage extends Page {
   TextPage({this.url});
 
   @override
-  void onCreate(BuildContext context, Page widget) {
+  void onCreate(BuildContext context, Page page) {
     mContext = context;
-    print(widget.url);
+    print(page.url);
   }
 }
