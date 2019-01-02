@@ -12,23 +12,22 @@ class TableTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    assert(element.localName == 'table', 'Expected <table>, instead found $element');
+    assert(element.localName == 'table',
+        'Expected <table>, instead found $element');
 
     var body = element.children
         .firstWhere((el) => el.localName == 'tbody', orElse: () => null);
-
     List<TableRow> children;
     if (body != null) {
       children = body.children.map(_buildRow).toList();
     } else {
-      children = const [];
+      children = [];
     }
 
     return new Table(
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      children: children,
-      border: TableBorder.all(width: 1.0,color: Colors.grey)
-    );
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: children,
+        border: TableBorder.all(width: 1.0, color: Colors.grey));
   }
 
   /// Builds a table row from  a <tr> tag.
@@ -39,7 +38,14 @@ class TableTag extends StatelessWidget {
 
   /// Builds a table cell from a <td> tag.
   TableCell _buildCell(dom.Element cell) {
-    assert(cell.localName == 'td', 'Expected <td>, instead found $cell');
-    // return new TableCell(child: new Container(child: cell.nodes));
+    assert(cell.localName == 'td' || cell.localName == 'th',
+        'Expected <td> or <th>, instead found $cell');
+    return new TableCell(
+        child: new Container(
+            child: new Text(cell.text,
+                style: TextStyle(
+                    fontWeight: cell.localName == 'th'
+                        ? FontWeight.bold
+                        : FontWeight.normal))));
   }
 }

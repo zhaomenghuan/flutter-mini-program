@@ -7,6 +7,7 @@ import 'package:flutter_mini_program/tags/CheckboxTag.dart';
 import 'package:flutter_mini_program/tags/HrTag.dart';
 import 'package:flutter_mini_program/tags/IconTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
+import 'package:flutter_mini_program/tags/TableTag.dart';
 import 'package:flutter_mini_program/tags/TextTag.dart';
 import 'package:flutter_mini_program/tags/ImageTag.dart';
 import 'package:flutter_mini_program/tags/VideoTag.dart';
@@ -77,6 +78,10 @@ class HtmlParser {
         case 'video':
           widgetList
               .add(new VideoTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'table':
+          widgetList
+              .add(new TableTag(page: page, element: node, style: nodeStyles));
           break;
         case 'hr':
           widgetList
