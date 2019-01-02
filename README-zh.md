@@ -1,20 +1,18 @@
-[中文文档](./README-zh.md)
+# Flutter 小程序
 
-# Flutter MiniProgram
+一个基于 Flutter 框架的小程序开发框架。通过解析 HTML 标签 和 CSS 样式，用于开发小程序应用，项目灵感来自 [FlutterHtmlView](https://github.com/PonnamKarthik/FlutterHtmlView)。
 
-A Flutter's mini-program development framework by parsing HTML and CSS. This Project is inspired by [FlutterHtmlView](https://github.com/PonnamKarthik/FlutterHtmlView).
+## 特性
 
-## Features
+- 将 html 标签转换为 Flutter 组件
+- 支持使用 css 样式渲染 Flutter 组件
+- 支持模板编译及数据绑定（TODO）
 
-- Convert html tags to flutter widgets
-- Support use css to rendering flutter widgets
-- Support template compile and data binding. (TODO)
+## 框架
 
-## Framework
+### 视图层
 
-### View layer
-
-The view layer of the framework is written by html and css, and the view layer of the page is defined by the .html file, which is displayed by the component. The data of the logical layer is reflected into a view, and the events of the view layer are sent to the logical layer. A Component is the basic building block of a view.
+框架的视图层由 html 与 css 编写，通过 .html 文件定义页面的视图层，由组件来进行展示。将逻辑层的数据反应成视图，同时将视图层的事件发送给逻辑层。组件(Component)是视图的基本组成单元。
 
 ```html
 <config>
@@ -75,9 +73,9 @@ The view layer of the framework is written by html and css, and the view layer o
 </style>
 ```
 
-### Logic Layer
+### 逻辑层
 
-The logic layer of the mini-program development framework is developed using Dart syntax, and the organization of the view logic and native plugin calls are done through the Dart / Flutter plugin. The logic layer processes the data and sends it to the view layer, while accepting event feedback from the view layer.
+小程序开发框架的逻辑层使用 Dart 语法进行开发，通过 Dart / Flutter 插件完成视图逻辑的组织及原生插件调用。逻辑层将数据进行处理后发送给视图层，同时接受视图层的事件反馈。
 
 ```dart
 class IndexPage extends Page {
@@ -116,9 +114,9 @@ class IndexPage extends Page {
 }
 ```
 
-## Component
+## 组件
 
-### Supported Tags
+### 支持的组件
 
 - view/div: 视图容器
 - icon: 图标
@@ -133,15 +131,15 @@ class IndexPage extends Page {
 - h1 ~ h6: 标题
 - a: 链接
 
-### View
+### 视图
 
-A view container, equivalent to the div tag of the Web or the View component of React Native.
+视图容器，相当于 Web 的 div 标签或者 React Native 的 View 组件。
 
 API
 
-| Attribute name   |      Types      |  Defaults | Description |
+| 属性名   |      类型      |  默认值 | 描述 |
 |----------|:-------------:|------:|:-------------:|
-| class |  String |  | Custom style name |
-| style |  String |  | Inline style |
-| onTap | EventHandle |  | Click event |
-| onLongTap | EventHandle |  | Long press event |
+| class |  String |  | 自定义样式名 |
+| style |  String |  | 内联样式 |
+| onTap | EventHandle |  | 点击事件 |
+| onLongTap | EventHandle |  | 长按事件 |

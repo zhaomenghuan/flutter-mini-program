@@ -48,6 +48,8 @@ class ConvertUtil {
     Match nameMatch = nameExp.firstMatch(input);
     if (nameMatch != null) {
       name = nameMatch.group(1);
+    } else {
+      name = input;
     }
 
     Match argumentsMatch = argumentsExp.firstMatch(input);

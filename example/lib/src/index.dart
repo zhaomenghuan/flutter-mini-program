@@ -11,12 +11,11 @@ class IndexPage extends Page {
   @override
   void onCreate(BuildContext context, Page page) {
     mContext = context;
-
-    print(page);
-    print(page.emitter);
-    print(page.view);
-    print(Application.router);
-    page.emitter.on('lifecycle', () => print('监听'));
+//    print(page);
+//    print(page.emitter);
+//    print(page.view);
+//    print(Application.router);
+//    page.emitter.on('lifecycle', () => print('监听'));
   }
 
   Map data = {

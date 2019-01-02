@@ -24,38 +24,53 @@ class ViewTag extends StatelessWidget {
     if (nodes.length == 1) {
       htmlParser.parseChildren(page, nodes.single, widgetList);
     } else {
-      nodes.forEach((dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
+      nodes.forEach(
+          (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
     }
 
-    return Container(
-      alignment: parseAlignment(),
-      margin: style['margin'],
-      padding: style['padding'],
-      child: Wrap(children: widgetList),
-    );
+    var attributes = element.attributes;
+    var onTap = attributes['ontap'];
+    var onLongTap = attributes['onlongtap'];
+
+    return GestureDetector(
+        onTap: () {
+          if (onTap != null) {
+            page.invoke(onTap);
+          }
+        },
+        onLongPress: () {
+          if (onLongTap != null) {
+            page.invoke(onLongTap);
+          }
+        },
+        child: Container(
+            alignment: parseAlignment(),
+            margin: style['margin'],
+            padding: style['padding'],
+            child: Wrap(children: widgetList)));
   }
 
   Alignment parseAlignment() {
     var alignment = element.attributes['alignment'];
-    switch(alignment) {
+    switch (alignment) {
       case 'topLeft':
-        return  Alignment.topLeft;
+        return Alignment.topLeft;
       case 'topCenter':
-        return  Alignment.topCenter;
+        return Alignment.topCenter;
       case 'topRight':
-        return  Alignment.topRight;
+        return Alignment.topRight;
       case 'centerLeft':
-        return  Alignment.centerLeft;
+        return Alignment.centerLeft;
       case 'center':
-        return  Alignment.center;
+        return Alignment.center;
       case 'centerRight':
-        return  Alignment.centerRight;
+        return Alignment.centerRight;
       case 'centerRight':
-        return  Alignment.bottomLeft;
+        return Alignment.bottomLeft;
       case 'centerRight':
-        return  Alignment.bottomCenter;
+        return Alignment.bottomCenter;
       case 'centerRight':
-        return  Alignment.bottomRight;
+        return Alignment.bottomRight;
       default:
         return Alignment.topLeft;
     }

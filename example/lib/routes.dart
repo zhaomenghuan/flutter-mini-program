@@ -7,6 +7,7 @@ import 'package:flutter_mini_program_example/src/image.dart';
 import 'package:flutter_mini_program_example/src/index.dart';
 import 'package:flutter_mini_program_example/src/text.dart';
 import 'package:flutter_mini_program_example/src/video.dart';
+import 'package:flutter_mini_program_example/src/view.dart';
 
 class Routes {
   static void configureRoutes(Router router) {
@@ -23,7 +24,7 @@ class Routes {
 
     // View
     defineRoute(router, "/view", (BuildContext context, Map<String, List<String>> params) {
-      return new IconPage(url: 'assets/page/view.html');
+      return new ViewPage(url: 'assets/page/view.html');
     });
 
     // Icon
