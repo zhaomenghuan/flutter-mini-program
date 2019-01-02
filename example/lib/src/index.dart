@@ -20,13 +20,13 @@ class IndexPage extends Page {
 
   Map data = {
     "list": [
-      {"title": "View", "subtitle": "视图容器", "routeName": "/view"},
-      {"title": "Icon", "subtitle": "图标", "routeName": "/icon"},
-      {"title": "Text", "subtitle": "文本", "routeName": "/text"},
-      {"title": "Button", "subtitle": "按钮", "routeName": "/button"},
-      {"title": "Checkbox", "subtitle": "复选框", "routeName": "/checkbox"},
-      {"title": "Image", "subtitle": "图片", "routeName": "/image"},
-      {"title": "Video", "subtitle": "视频", "routeName": "/video"}
+      {"title": "View", "subtitle": "视图容器", "link": "/view"},
+      {"title": "Icon", "subtitle": "图标", "link": "/icon"},
+      {"title": "Text", "subtitle": "文本", "link": "/text"},
+      {"title": "Button", "subtitle": "按钮", "link": "/button"},
+      {"title": "Checkbox", "subtitle": "复选框", "link": "/checkbox"},
+      {"title": "Image", "subtitle": "图片", "link": "/image"},
+      {"title": "Video", "subtitle": "视频", "link": "/video"}
     ]
   };
 

@@ -130,6 +130,8 @@ class IndexPage extends Page {
 - p: 段落
 - h1 ~ h6: 标题
 - a: 链接
+- table: 表格
+- list-view: 列表
 
 ### 视图
 

@@ -6,6 +6,14 @@
 
 <template>
     <view class="container">
-        <list-view data="list"></list-view>
+        <list-view>
+            <list-item title="View" subtitle="视图容器" link="/view" onTap="openPage('/view')"></list-item>
+            <list-item title="Icon" subtitle="图标" link="/icon" onTap="openPage('/icon')"></list-item>
+            <list-item title="Text" subtitle="文本" link="/text" onTap="openPage('/text')"></list-item>
+            <list-item title="Button" subtitle="按钮" link="/button" onTap="openPage('/button')"></list-item>
+            <list-item title="Checkbox" subtitle="复选框" link="/checkbox" onTap="openPage('/checkbox')"></list-item>
+            <list-item title="Image" subtitle="图片" link="/image" onTap="openPage('/image')"></list-item>
+            <list-item title="Video" subtitle="视频" link="/video" onTap="openPage('/video')"></list-item>
+        </list-view>
     </view>
 </template>

@@ -42,6 +42,7 @@ class TableTag extends StatelessWidget {
         'Expected <td> or <th>, instead found $cell');
     return new TableCell(
         child: new Container(
+            padding: EdgeInsets.all(5),
             child: new Text(cell.text,
                 style: TextStyle(
                     fontWeight: cell.localName == 'th'
