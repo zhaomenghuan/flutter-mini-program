@@ -1,12 +1,4 @@
 {
-  "pages": {
-    "/": "page/index",
-    "/icon": "page/icon",
-    "/text": "page/text",
-    "/button": "page/button",
-    "/image": "page/image",
-    "/checkbox": "page/checkbox"
-  },
   "window": {
     "navigationBarTitleText": "Flutter 小程序"
   }

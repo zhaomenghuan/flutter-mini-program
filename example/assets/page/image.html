@@ -1,15 +1,74 @@
 <config>
-{
+    {
     "navigationBarTitleText": "Flutter 小程序 - Image"
-}
+    }
 </config>
 
 <template>
-    <view>
-        <!--图片-->
-        <text>网络图片：</text>
-        <image src="https://avatars2.githubusercontent.com/u/13075561?s=460&v=4"></image>
-        <text>本地图片：</text>
-        <image src="../images/avatar.png"></image>
+    <view class="container">
+        <view>
+            <h4>网络图片：</h4>
+            <image src="https://avatars2.githubusercontent.com/u/13075561?s=460&v=4"
+                   style="width: 200px;height:200px"></image>
+        </view>
+        <view>
+            <h4>本地图片：</h4>
+            <image src="../images/avatar.png" style="width: 200px;height:200px"></image>
+        </view>
+        <view>
+            <h4>图片裁剪模式 fit = "fill": </h4>
+            <image src="../images/avatar.png" style="width: 200px;height:100px" fit="fill"></image>
+        </view>
+
+        <view>
+            <h4>图片裁剪模式 fit = "contain": </h4>
+            <image src="../images/avatar.png" style="width: 200px;height:100px" fit="contain"></image>
+        </view>
+
+        <view>
+            <h4>图片裁剪模式 fit = "cover": </h4>
+            <image src="../images/avatar.png" style="width: 200px;height:100px" fit="cover"></image>
+        </view>
+
+        <view>
+            <h4>图片裁剪模式 fit = "fitWidth": </h4>
+            <image src="../images/avatar.png" style="width: 200px;height:100px" fit="fitWidth"></image>
+        </view>
+
+        <view>
+            <h4>图片裁剪模式 fit = "fitHeight": </h4>
+            <image src="../images/avatar.png" style="width: 200px;height:100px" fit="fitHeight"></image>
+        </view>
+
+        <view>
+            <h4>图片裁剪模式 fit = "scaleDown": </h4>
+            <image src="../images/avatar.png" style="width: 200px;height:100px" fit="scaleDown"></image>
+        </view>
+
+        <h3> style 属性支持</h3>
+        <table>
+            <tr>
+                <th>属性名称</th>
+                <th>属性值</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>图片路径</td>
+            </tr>
+            <tr>
+                <td>style</td>
+                <td>图片样式</td>
+            </tr>
+            <tr>
+                <td>fit</td>
+                <td>图片裁剪、缩放的模式, fill | contain | cover | fitWidth | fitHeight | none | scaleDown</td>
+            </tr>
+        </table>
     </view>
 </template>
+
+<style>
+.container {
+    padding: 10px;
+}
+</style>

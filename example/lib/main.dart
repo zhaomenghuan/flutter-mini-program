@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fluro/fluro.dart';
-
-import 'package:flutter_mini_program_example/application.dart';
-import 'package:flutter_mini_program_example/routes.dart';
+import 'package:flutter_mini_program_example/app.dart';
+import 'package:flutter_mini_program_example/src/button.dart';
+import 'package:flutter_mini_program_example/src/checkbox.dart';
+import 'package:flutter_mini_program_example/src/icon.dart';
+import 'package:flutter_mini_program_example/src/image.dart';
+import 'package:flutter_mini_program_example/src/index.dart';
+import 'package:flutter_mini_program_example/src/text.dart';
+import 'package:flutter_mini_program_example/src/video.dart';
+import 'package:flutter_mini_program_example/src/view.dart';
 
 void main() {
   runApp(MiniProgramApp());
@@ -14,16 +19,28 @@ class MiniProgramApp extends StatefulWidget {
 }
 
 class MiniProgramAppState extends State<MiniProgramApp> {
-  var AppConfig = null;
-
   MiniProgramAppState() {
-    final router = new Router();
-    Routes.configureRoutes(router);
-    Application.router = router;
+    App.init({
+      // Home
+      "/": IndexPage(url: 'assets/page/index.html'),
+      // View
+      "/view": ViewPage(url: 'assets/page/view.html'),
+      // Icon
+      "/icon": IconPage(url: 'assets/page/icon.html'),
+      // Text
+      "/text": TextPage(url: 'assets/page/text.html'),
+      // Button
+      "/button": ButtonPage(url: 'assets/page/button.html'),
+      // Checkbox
+      "/checkbox": CheckboxPage(url: 'assets/page/checkbox.html'),
+      // Image
+      "/image": ImagePage(url: 'assets/page/image.html'),
+      // Video
+      "/video": VideoPage(url: 'assets/page/video.html')
+    });
   }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(onGenerateRoute: Application.router.generator);
+    return MaterialApp(onGenerateRoute: App.router.generator);
   }
 }

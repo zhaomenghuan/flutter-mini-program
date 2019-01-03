@@ -176,6 +176,12 @@ class StyleParser {
           case 'display':
             styleDeclaration['display'] = value;
             break;
+          case 'width':
+            styleDeclaration['width'] = parsePxSize(value);
+            break;
+          case 'height':
+            styleDeclaration['height'] = parsePxSize(value);
+            break;
           case 'margin':
             styleDeclaration['margin'] = parseMargin(value);
             break;
@@ -220,13 +226,11 @@ class StyleParser {
   }
 
   static parseMargin(String value) {
-    value = value.replaceAll('px', '').trim();
-    return EdgeInsets.only(top: double.parse(value));
+    return parseEdgeInsets(value);
   }
 
   static parsePadding(String value) {
-    value = value.replaceAll('px', '').trim();
-    return EdgeInsets.all(double.parse(value));
+    return parseEdgeInsets(value);
   }
 
   /// Parse Color
@@ -244,6 +248,10 @@ class StyleParser {
   static parsePxSize(String value) {
     value = value.replaceAll('px', '').trim();
     return double.parse(value);
+  }
+
+  static parseEdgeInsets(String value) {
+    return EdgeInsets.all(parsePxSize(value));
   }
 
   /// [font-style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program_example/application.dart';
+import 'package:flutter_mini_program_example/app.dart';
 
 class IndexPage extends Page {
   String url;
@@ -20,7 +20,7 @@ class IndexPage extends Page {
 
   Map<String, Function> get methods => {
     "openPage": (String path) {
-      Application.navigateTo(mContext, path);
+      App.navigateTo(mContext, path);
     }
   };
 }

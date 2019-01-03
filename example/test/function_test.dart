@@ -1,24 +1,25 @@
-typedef dynamic OnCall(List);
+//class _$ {
+//  Symbol last;
+//  noSuchMethod() => last = i.memberName;
+//}
+//final dynamic $ = _$();
+//
+//main() {
+//  print($.x1);   // Symbol #x1
+//}
 
-class VarargsFunction extends Function {
-  OnCall _onCall;
-
-  VarargsFunction(this._onCall);
-
-  call() => _onCall([]);
-
-  @override
+class ClassTest {
   noSuchMethod(Invocation invocation) {
-    final arguments = invocation.positionalArguments;
-    return _onCall(arguments);
+    print(invocation.isMethod);
+    print(invocation.memberName);
+    Invocation.setter(const Symbol("test="), "");
+
+    print(invocation.typeArguments);
   }
 }
+final dynamic $ = ClassTest();
 
 main() {
-  final superHeroes = new VarargsFunction((arguments) {
-    for (final superHero in arguments) {
-      print("There's no stopping ${superHero}");
-    }
-  });
-  superHeroes();
+  $.test(['type']);
 }
+

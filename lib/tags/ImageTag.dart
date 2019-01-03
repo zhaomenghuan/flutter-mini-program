@@ -16,20 +16,44 @@ class ImageTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String src = this.element.attributes['src'];
+    var attributes = element.attributes;
+    String src = attributes['src'];
+    double width = style['width'];
+    double height = style['height'];
+    BoxFit fit = parseBoxFit(attributes);
+
     if (src.startsWith("http") || src.startsWith("https")) {
       return new CachedNetworkImage(
-        imageUrl: src,
-        fit: BoxFit.cover,
-      );
+          imageUrl: src, width: width, height: height, fit: fit);
     } else if (src.startsWith('data:image')) {
       var exp = new RegExp(r'data:.*;base64,');
       var base64Str = src.replaceAll(exp, '');
       var bytes = base64.decode(base64Str);
-      return new Image.memory(bytes, fit: BoxFit.cover);
+      return new Image.memory(bytes, width: width, height: height, fit: fit);
     } else {
       String imageUrl = ConvertUtil.parsePath(this.page.url, src);
-      return Image.asset(imageUrl);
+      return Image.asset(imageUrl, width: width, height: height, fit: fit);
+    }
+  }
+
+  /// Parse BoxFit mode
+  BoxFit parseBoxFit(attributes) {
+    String mode = attributes['fit'];
+    switch (mode) {
+      case 'fill':
+        return BoxFit.fill;
+      case 'contain':
+        return BoxFit.contain;
+      case 'cover':
+        return BoxFit.cover;
+      case 'fitWidth':
+        return BoxFit.fitWidth;
+      case 'fitHeight':
+        return BoxFit.fitHeight;
+      case 'none':
+        return BoxFit.none;
+      case 'scaleDown':
+        return BoxFit.scaleDown;
     }
   }
 }

@@ -36,26 +36,28 @@ class ButtonTag extends StatelessWidget {
               page.invoke(onTap);
             });
         break;
+      case 'raised':
+        return new RaisedButton(
+            textColor: Colors.white,
+            color: Colors.blue,
+            splashColor: Colors.blueGrey,
+            child: new Text(text),
+            onPressed: () {
+              page.invoke(onTap);
+            });
       case 'flat':
         return new FlatButton(
-            // 字体颜色
             textColor: Colors.white,
-            // 背景颜色
             color: Colors.blue,
-            // 文字
             child: new Text(text),
-            // 扁平化按钮
             onPressed: () {
               page.invoke(onTap);
             });
         break;
-      case 'raised':
-        return new RaisedButton(
-            // 字体颜色
+      case 'outline':
+        return new OutlineButton(
             textColor: Colors.white,
-            // 背景颜色
             color: Colors.blue,
-            // 波纹颜色
             splashColor: Colors.blueGrey,
             child: new Text(text),
             onPressed: () {
