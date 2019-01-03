@@ -210,7 +210,8 @@ class StyleParser {
             styleDeclaration['textDecorationColor'] = parseColor(value);
             break;
           case 'text-decoration-style':
-            styleDeclaration['textDecorationStyle'] = parseTextDecorationStyle(value);
+            styleDeclaration['textDecorationStyle'] =
+                parseTextDecorationStyle(value);
             break;
           case 'text-align':
             styleDeclaration['textAlign'] = parseTextAlign(value);
@@ -223,14 +224,6 @@ class StyleParser {
     }
 
     return styleDeclaration;
-  }
-
-  static parseMargin(String value) {
-    return parseEdgeInsets(value);
-  }
-
-  static parsePadding(String value) {
-    return parseEdgeInsets(value);
   }
 
   /// Parse Color
@@ -252,6 +245,34 @@ class StyleParser {
 
   static parseEdgeInsets(String value) {
     return EdgeInsets.all(parsePxSize(value));
+  }
+
+  /// [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin)
+  static parseMargin(String value) {
+    List valueList = value.split(r" ");
+    switch (valueList.length) {
+      case 1:
+        return EdgeInsets.all(parsePxSize(value));
+      case 2:
+        double vertical = parsePxSize(valueList[0]);
+        double horizontal = parsePxSize(valueList[1]);
+        return EdgeInsets.fromLTRB(horizontal, vertical, horizontal, vertical);
+      case 3:
+        double top = parsePxSize(valueList[0]);
+        double horizontal = parsePxSize(valueList[1]);
+        double bottom = parsePxSize(valueList[2]);
+        return EdgeInsets.fromLTRB(horizontal, top, horizontal, bottom);
+      case 4:
+        double top = parsePxSize(valueList[0]);
+        double right = parsePxSize(valueList[1]);
+        double bottom = parsePxSize(valueList[2]);
+        double left = parsePxSize(valueList[3]);
+        return EdgeInsets.fromLTRB(left, top, right, bottom);
+    }
+  }
+
+  static parsePadding(String value) {
+    return parseEdgeInsets(value);
   }
 
   /// [font-style](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style)

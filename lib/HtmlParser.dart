@@ -3,7 +3,7 @@ import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/StyleParser.dart';
 import 'package:flutter_mini_program/tags/BreakTag.dart';
 import 'package:flutter_mini_program/tags/ButtonTag.dart';
-import 'package:flutter_mini_program/tags/CheckboxTag.dart';
+import 'package:flutter_mini_program/tags/CheckboxGroupTag.dart';
 import 'package:flutter_mini_program/tags/HrTag.dart';
 import 'package:flutter_mini_program/tags/IconTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
@@ -75,9 +75,9 @@ class HtmlParser {
           widgetList
               .add(new ButtonTag(page: page, element: node, style: nodeStyles));
           break;
-        case 'checkbox':
+        case 'checkbox-group':
           widgetList.add(
-              new CheckboxTag(page: page, element: node, style: nodeStyles));
+              new CheckboxGroupTag(page: page, element: node, style: nodeStyles));
           break;
         case 'switch':
           widgetList.add(

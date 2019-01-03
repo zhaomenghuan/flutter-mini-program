@@ -146,3 +146,30 @@ API
 | style |  String |  | 内联样式 |
 | onTap | EventHandle |  | 点击事件 |
 | onLongTap | EventHandle |  | 长按事件 |
+
+### 图片
+
+API
+
+| 属性名   |      类型      |  默认值 | 描述 |
+|----------|:-------------:|------:|:-------------:|
+| class |  String |  | 自定义样式名 |
+| style |  String |  | 内联样式 |
+| src | String |  | 图片路径 |
+| fit | String |  | 图片裁剪、缩放的模式, fill | contain | cover | fitWidth | fitHeight | none | scaleDown |
+
+```html
+<view>
+    <h4>网络图片：</h4>
+    <image src="https://avatars2.githubusercontent.com/u/13075561?s=460&v=4"
+           style="width: 200px;height:200px"></image>
+</view>
+<view>
+    <h4>本地图片：</h4>
+    <image src="../images/avatar.png" style="width: 200px;height:200px"></image>
+</view>
+<view>
+    <h4>图片裁剪模式 fit = "fill": </h4>
+    <image src="../images/avatar.png" style="width: 200px;height:100px" fit="fill"></image>
+</view>
+```
