@@ -15,6 +15,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   fluro: "^1.4.0"
+  toast: ^0.0.6
 
 dev_dependencies:
   flutter_test:

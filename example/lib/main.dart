@@ -5,6 +5,7 @@ import 'package:flutter_mini_program_example/src/checkbox.dart';
 import 'package:flutter_mini_program_example/src/icon.dart';
 import 'package:flutter_mini_program_example/src/image.dart';
 import 'package:flutter_mini_program_example/src/index.dart';
+import 'package:flutter_mini_program_example/src/switch.dart';
 import 'package:flutter_mini_program_example/src/text.dart';
 import 'package:flutter_mini_program_example/src/video.dart';
 import 'package:flutter_mini_program_example/src/view.dart';
@@ -33,12 +34,15 @@ class MiniProgramAppState extends State<MiniProgramApp> {
       "/button": ButtonPage(url: 'assets/page/button.html'),
       // Checkbox
       "/checkbox": CheckboxPage(url: 'assets/page/checkbox.html'),
+      // Switch
+      "/switch": SwitchPage(url: 'assets/page/switch.html'),
       // Image
       "/image": ImagePage(url: 'assets/page/image.html'),
       // Video
       "/video": VideoPage(url: 'assets/page/video.html')
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(onGenerateRoute: App.router.generator);

@@ -123,6 +123,7 @@ class IndexPage extends Page {
 - text: 文本
 - button: 按钮
 - checkbox: 复选框
+- switch: 单选开关
 - image: 图片
 - video: 视频
 - br: 换行符

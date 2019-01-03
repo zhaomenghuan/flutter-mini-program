@@ -1,0 +1,46 @@
+<config>
+    {
+    "navigationBarTitleText": "Flutter 小程序 - Switch"
+    }
+</config>
+
+<template>
+    <view class="container">
+        <view>
+            <switch checked="false" onChange="switchChange"/>
+        </view>
+        <view>
+            <switch checked="true" onChange="switchChange" color="#ff0000"/>
+        </view>
+
+        <h3> style 属性支持</h3>
+        <table>
+            <tr>
+                <th>属性名称</th>
+                <th>类型</th>
+                <th>描述</th>
+            </tr>
+            <tr>
+                <td>checked</td>
+                <td>Boolean</td>
+                <td>是否选中</td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>String</td>
+                <td>组件颜色</td>
+            </tr>
+            <tr>
+                <td>onChange</td>
+                <td>EventHandle</td>
+                <td>checked 改变时触发</td>
+            </tr>
+        </table>
+    </view>
+</template>
+
+<style>
+    .container {
+        padding: 10px;
+    }
+</style>

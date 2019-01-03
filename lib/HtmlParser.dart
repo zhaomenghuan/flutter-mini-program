@@ -7,6 +7,7 @@ import 'package:flutter_mini_program/tags/CheckboxTag.dart';
 import 'package:flutter_mini_program/tags/HrTag.dart';
 import 'package:flutter_mini_program/tags/IconTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
+import 'package:flutter_mini_program/tags/SwitchTag.dart';
 import 'package:flutter_mini_program/tags/TableTag.dart';
 import 'package:flutter_mini_program/tags/TextTag.dart';
 import 'package:flutter_mini_program/tags/ImageTag.dart';
@@ -41,10 +42,6 @@ class HtmlParser {
           widgetList
               .add(new ViewTag(page: page, element: node, style: nodeStyles));
           break;
-        case 'icon':
-          widgetList
-              .add(new IconTag(page: page, element: node, style: nodeStyles));
-          break;
         case 'text':
         case 'p':
         case 'span':
@@ -58,6 +55,22 @@ class HtmlParser {
           widgetList
               .add(new TextTag(page: page, element: node, style: nodeStyles));
           break;
+        case 'table':
+          widgetList
+              .add(new TableTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'hr':
+          widgetList
+              .add(new HrTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'br':
+          widgetList
+              .add(new BreakTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'icon':
+          widgetList
+              .add(new IconTag(page: page, element: node, style: nodeStyles));
+          break;
         case 'button':
           widgetList
               .add(new ButtonTag(page: page, element: node, style: nodeStyles));
@@ -65,6 +78,10 @@ class HtmlParser {
         case 'checkbox':
           widgetList.add(
               new CheckboxTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'switch':
+          widgetList.add(
+              new SwitchTag(page: page, element: node, style: nodeStyles));
           break;
         case 'list-view':
           widgetList.add(
@@ -78,18 +95,6 @@ class HtmlParser {
         case 'video':
           widgetList
               .add(new VideoTag(page: page, element: node, style: nodeStyles));
-          break;
-        case 'table':
-          widgetList
-              .add(new TableTag(page: page, element: node, style: nodeStyles));
-          break;
-        case 'hr':
-          widgetList
-              .add(new HrTag(page: page, element: node, style: nodeStyles));
-          break;
-        case 'br':
-          widgetList
-              .add(new BreakTag(page: page, element: node, style: nodeStyles));
           break;
         default:
           node.children

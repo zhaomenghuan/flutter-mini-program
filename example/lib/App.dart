@@ -5,7 +5,7 @@ class App {
   static Router router;
 
   static init(routes) {
-    router = new Router();
+    var router = new Router();
 
     // 404
     router.notFoundHandler = new Handler(
@@ -19,6 +19,8 @@ class App {
         return page;
       }));
     });
+
+    App.router = router;
   }
 
   // 保留当前页面，跳转到应用内的某个页面
