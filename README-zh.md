@@ -133,6 +133,7 @@ class IndexPage extends Page {
 - a: 链接
 - table: 表格
 - list-view: 列表
+- web-view: 网页容器
 
 ### 视图
 
@@ -146,6 +147,27 @@ API
 | style |  String |  | 内联样式 |
 | onTap | EventHandle |  | 点击事件 |
 | onLongTap | EventHandle |  | 长按事件 |
+
+### 文本输入框
+
+文本输入框, 相当于 Web 的 input 标签 或者 iOS 中的 UITextField 和 Android 中的 EditText。
+
+| 属性名   |      类型      |  默认值 | 描述 |
+|----------|:-------------:|------:|:-------------:|
+| type | String |  | input 的类型 |
+| placeholder | String |  | 占位符 |
+| focus | Boolean |  false | 获取焦点 |
+
+```html
+<view>
+    <text>这是一个可以自动聚焦的input: </text>
+    <input type="text" placeholder="这是一个可以自动聚焦的input" focus="true" />
+</view>
+<view>
+    <text>数字键盘: </text>
+    <input type="number" placeholder="数字键盘" />
+</view>
+```
 
 ### 图片
 

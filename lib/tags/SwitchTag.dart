@@ -30,8 +30,6 @@ class CheckboxTagState extends State<SwitchTag> {
   @override
   void initState() {
     var attributes = widget.element.attributes;
-    print(attributes);
-
     _isChecked = ConvertUtil.parseValue(attributes['checked']);
   }
 

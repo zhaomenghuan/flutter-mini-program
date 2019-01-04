@@ -38,6 +38,7 @@ class ListViewTagState extends State<ListViewTag> {
     });
 
     return new ListView.builder(
+        physics: new NeverScrollableScrollPhysics(), // Disable scrolling events
         shrinkWrap: true,
         itemCount: data.length,
         itemBuilder: (context, index) => new ListTile(

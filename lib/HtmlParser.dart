@@ -6,6 +6,7 @@ import 'package:flutter_mini_program/tags/ButtonTag.dart';
 import 'package:flutter_mini_program/tags/CheckboxGroupTag.dart';
 import 'package:flutter_mini_program/tags/HrTag.dart';
 import 'package:flutter_mini_program/tags/IconTag.dart';
+import 'package:flutter_mini_program/tags/InputTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
 import 'package:flutter_mini_program/tags/SwitchTag.dart';
 import 'package:flutter_mini_program/tags/TableTag.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_mini_program/tags/TextTag.dart';
 import 'package:flutter_mini_program/tags/ImageTag.dart';
 import 'package:flutter_mini_program/tags/VideoTag.dart';
 import 'package:flutter_mini_program/tags/ViewTag.dart';
+import 'package:flutter_mini_program/tags/WebViewTag.dart';
 
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
@@ -71,6 +73,10 @@ class HtmlParser {
           widgetList
               .add(new IconTag(page: page, element: node, style: nodeStyles));
           break;
+        case 'input':
+          widgetList
+              .add(new InputTag(page: page, element: node, style: nodeStyles));
+          break;
         case 'button':
           widgetList
               .add(new ButtonTag(page: page, element: node, style: nodeStyles));
@@ -95,6 +101,10 @@ class HtmlParser {
         case 'video':
           widgetList
               .add(new VideoTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'web-view':
+          widgetList
+              .add(new WebViewTag(page: page, element: node, style: nodeStyles));
           break;
         default:
           node.children

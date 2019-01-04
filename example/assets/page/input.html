@@ -1,0 +1,32 @@
+<config>
+{
+    "navigationBarTitleText": "Flutter MiniProgram - Input"
+}
+</config>
+
+<template>
+    <view class="container">
+        <view>
+            <text>这是一个可以自动聚焦的input: </text>
+            <input type="text" placeholder="这是一个可以自动聚焦的input" focus="true" onInput="bindKeyInput"/>
+        </view>
+        <view>
+            <text>数字键盘: </text>
+            <input type="number" placeholder="数字键盘" />
+        </view>
+        <view>
+            <text>手机号码: </text>
+            <input type="phone" placeholder="手机号码" />
+        </view>
+        <view>
+            <text>邮箱地址: </text>
+            <input type="email" placeholder="邮箱地址" />
+        </view>
+    </view>
+</template>
+
+<style>
+.container {
+    padding: 10px;
+}
+</style>

@@ -6,7 +6,7 @@ import 'package:flutter_mini_program/PageParser.dart';
 import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:flutter_mini_program/utils/ResourceUtil.dart';
 
-abstract class Page extends StatefulWidget {
+class Page extends StatefulWidget {
   String url;
   EventEmitter emitter;
   Widget view;
@@ -31,7 +31,7 @@ abstract class Page extends StatefulWidget {
   @override
   PageState createState() => PageState();
 
-  void onCreate(BuildContext context, Page page);
+  void onCreate(BuildContext context, Page page) {}
 
   void invoke(String functionTag) {
     if (functionTag != null) {
