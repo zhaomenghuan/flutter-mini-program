@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_program/AppService.dart';
 import 'package:flutter_mini_program/EventEmitter.dart';
 import 'package:flutter_mini_program/PageParser.dart';
 import 'package:flutter_mini_program/utils/ConvertUtil.dart';
@@ -31,6 +32,11 @@ class Page extends StatefulWidget {
   @override
   PageState createState() => PageState();
 
+  // Register Page Logic
+  void registerPageLogic(String script) {
+    print(script);
+  }
+
   void onCreate(BuildContext context, Page page) {}
 
   void invoke(String functionTag) {
@@ -39,6 +45,7 @@ class Page extends StatefulWidget {
       String name = methodMap['name'];
       List arguments = methodMap['arguments'];
       if (methods != null && methods.containsKey(name)) {
+        AppService.invokeMethod(name, arguments);
         Function callback = methods[name];
         Function.apply(callback, arguments);
       }

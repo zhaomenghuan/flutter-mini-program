@@ -121,16 +121,18 @@ class IndexPage extends Page {
 - view/div: 视图容器
 - icon: 图标
 - text: 文本
-- button: 按钮
-- checkbox: 复选框
-- switch: 单选开关
-- image: 图片
-- video: 视频
 - br: 换行符
 - hr: 水平分隔线
 - p: 段落
 - h1 ~ h6: 标题
 - a: 链接
+- button: 按钮
+- input: 输入框
+- checkbox: 复选框
+- switch: 单选开关
+- slider: 滑块
+- image: 图片
+- video: 视频
 - table: 表格
 - list-view: 列表
 - web-view: 网页容器

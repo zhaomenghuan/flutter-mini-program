@@ -17,11 +17,11 @@ class ViewPage extends Page {
   }
 
   Map<String, Function> get methods => {
-        "topLeftOnTap": () {
-          print("topLeft onTap");
-        },
-        "topLeftOnLongTap": () {
-          print("topLeft onLongTap");
-        }
-      };
+      "topLeftOnTap": () {
+        print("topLeft onTap");
+      },
+      "topLeftOnLongTap": () {
+        print("topLeft onLongTap");
+      }
+    };
 }

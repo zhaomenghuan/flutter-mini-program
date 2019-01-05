@@ -1,5 +1,4 @@
-group 'cn.com.agree.flutter.flutterminiprogram'
-version '1.0-SNAPSHOT'
+group 'cn.com.agree.flutter.miniprogram'
 
 buildscript {
     repositories {

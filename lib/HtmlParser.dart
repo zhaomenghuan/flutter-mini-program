@@ -8,6 +8,7 @@ import 'package:flutter_mini_program/tags/HrTag.dart';
 import 'package:flutter_mini_program/tags/IconTag.dart';
 import 'package:flutter_mini_program/tags/InputTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
+import 'package:flutter_mini_program/tags/SliderTag.dart';
 import 'package:flutter_mini_program/tags/SwitchTag.dart';
 import 'package:flutter_mini_program/tags/TableTag.dart';
 import 'package:flutter_mini_program/tags/TextTag.dart';
@@ -88,6 +89,10 @@ class HtmlParser {
         case 'switch':
           widgetList.add(
               new SwitchTag(page: page, element: node, style: nodeStyles));
+          break;
+        case 'slider':
+          widgetList.add(
+              new SliderTag(page: page, element: node, style: nodeStyles));
           break;
         case 'list-view':
           widgetList.add(

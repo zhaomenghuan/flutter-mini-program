@@ -34,6 +34,13 @@ class PageParser {
           (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
     }
 
+    // script
+    List<dom.Element> scriptElements = docBody.getElementsByTagName("script");
+    if (scriptElements.length > 0) {
+      dom.Element scriptElement = scriptElements.first;
+      page.registerPageLogic(scriptElement.text.trim());
+    }
+
     // Title
     String title = "";
     if (page.config != null && page.config.containsKey("navigationBarTitleText")) {

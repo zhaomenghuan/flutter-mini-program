@@ -13,17 +13,17 @@ class SwitchTag extends StatefulWidget {
   SwitchTag({this.page, this.element, this.style});
 
   @override
-  State<SwitchTag> createState() => CheckboxTagState();
+  State<SwitchTag> createState() => SwitchTagState();
 }
 
-class CheckboxTagState extends State<SwitchTag> {
+class SwitchTagState extends State<SwitchTag> {
   var _isChecked = true;
 
   onChange(bool isChecked) {
     setState(() {
       _isChecked = isChecked;
-      var onchange = widget.element.attributes['onchange'];
-      widget.page.invoke(onchange + "($_isChecked)");
+      var onChange = widget.element.attributes['onchange'];
+      widget.page.invoke(onChange + "($_isChecked)");
     });
   }
 

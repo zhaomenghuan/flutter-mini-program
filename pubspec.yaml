@@ -13,6 +13,7 @@ dependencies:
 
   html: ^0.13.3+3
   csslib: ^0.14.6
+  fluro: "^1.4.0"
   cached_network_image: "^0.5.0+1"
   video_player: ^0.8.0
   # https://pub.dartlang.org/packages/webview_flutter

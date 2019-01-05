@@ -1,7 +1,7 @@
 <config>
-    {
+{
     "navigationBarTitleText": "Flutter 小程序 - View"
-    }
+}
 </config>
 
 <template>
@@ -21,9 +21,16 @@
     </view>
 </template>
 
+<script>
+Page({
+  topLeftOnTap() {
+    alert('1');
+  }
+});
+</script>
+
 <style>
 .container {
-    margin: 30px;
     padding: 10px;
 }
 </style>

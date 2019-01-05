@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program_example/app.dart';
 import 'package:flutter_mini_program_example/src/button.dart';
 import 'package:flutter_mini_program_example/src/checkbox.dart';
 import 'package:flutter_mini_program_example/src/icon.dart';
@@ -39,6 +39,8 @@ class MiniProgramAppState extends State<MiniProgramApp> {
       "/checkbox": CheckboxPage(url: 'assets/page/checkbox.html'),
       // Switch
       "/switch": SwitchPage(url: 'assets/page/switch.html'),
+      // Slider
+      "/slider": Page(url: 'assets/page/slider.html'),
       // Image
       "/image": ImagePage(url: 'assets/page/image.html'),
       // Video

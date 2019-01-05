@@ -10,13 +10,13 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class MiniProgramPlugin implements MethodCallHandler {
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_mini_program");
+    final MethodChannel channel = new MethodChannel(registrar.messenger(), "mini_program/AppService");
     channel.setMethodCallHandler(new MiniProgramPlugin());
   }
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("getPlatformVersion")) {
+    if (call.method.equals("invokeMethod")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     } else {
       result.notImplemented();

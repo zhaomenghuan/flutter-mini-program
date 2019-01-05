@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program_example/app.dart';
 
 class IndexPage extends Page {
   String url;
