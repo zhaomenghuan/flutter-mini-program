@@ -9,6 +9,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_stetho: ^0.2.2
+
   built_value: ^6.2.0
 
   # The following adds the Cupertino Icons font to your application.

@@ -43,8 +43,10 @@ class PageParser {
 
     // Title
     String title = "";
-    if (page.config != null && page.config.containsKey("navigationBarTitleText")) {
-      title = page.config['navigationBarTitleText'];
+    if (page.config != null) {
+      if (page.config.containsKey("navigationBarTitleText")) {
+        title = page.config['navigationBarTitleText'];
+      }
     }
     return new Scaffold(
         appBar: AppBar(title: Text(title), centerTitle: true),

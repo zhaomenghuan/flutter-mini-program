@@ -1,34 +1,64 @@
 <config>
-    {
+{
     "navigationBarTitleText": "Flutter 小程序 - Button"
-    }
+}
 </config>
 
 <template>
     <view class="container">
-        <view>
-            <button type="close">关闭类型的按钮</button>
+        <text>按钮</text>
+        <view class="mb-10">
+            <button type="default" ontap="">default</button>
         </view>
-        <view>
-            <button type="back">返回类型的按钮</button>
+        <view class="mb-10">
+            <button type="primary">primary</button>
         </view>
-        <view>
-            <button type="floating-action" onTap="onFloatingButtonClick">Icon 类型的按钮</button>
+        <view class="mb-10">
+            <button type="warn">warn</button>
         </view>
-        <view>
-            <button type="icon">Icon 类型的按钮</button>
+
+        <text>disabled 状态</text>
+        <view class="mb-10">
+            <button type="default" disabled="true">default</button>
         </view>
-        <view>
-            <button type="raised">RaisedButton: "漂浮"按钮, 阴影效果的按钮</button>
+        <view class="mb-10">
+            <button type="primary" disabled="true">primary</button>
         </view>
-        <view>
-            <button type="flat">FlatButton: 扁平按钮, 扁平的 Material 类型的按钮</button>
+        <view class="mb-10">
+            <button type="warn" disabled="true">warn</button>
         </view>
-        <view>
-            <button type="outline">OutlineButton: 默认带边框，不带阴影且背景透明</button>
+
+        <text>loading 状态</text>
+        <view class="mb-10">
+            <button type="default" loading="true">default</button>
         </view>
-        <view>
-            <button type="raw-material">背景透明的按钮</button>
+        <view class="mb-10">
+            <button type="primary" loading="true">primary</button>
+        </view>
+        <view class="mb-10">
+            <button type="warn" loading="true">warn</button>
+        </view>
+
+        <text>plain 状态</text>
+        <view class="mb-10">
+            <button type="default" plain="true">default</button>
+        </view>
+        <view class="mb-10">
+            <button type="primary" plain="true">primary</button>
+        </view>
+        <view class="mb-10">
+            <button type="warn" plain="true">warn</button>
+        </view>
+
+        <text>按钮大小</text>
+        <view class="mb-10">
+            <button type="default" size="mini">default</button>
+        </view>
+        <view class="mb-10">
+            <button type="primary" size="mini">primary</button>
+        </view>
+        <view class="mb-10">
+            <button type="warn" size="mini">warn</button>
         </view>
     </view>
 </template>
@@ -36,5 +66,8 @@
 <style>
 .container {
     padding: 10px;
+}
+.mb-10 {
+    padding: 7.5px;
 }
 </style>

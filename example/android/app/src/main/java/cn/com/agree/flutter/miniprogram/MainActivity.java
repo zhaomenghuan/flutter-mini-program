@@ -1,4 +1,4 @@
-package cn.com.agree.flutter.flutterminiprogramexample;
+package cn.com.agree.flutter.miniprogram;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

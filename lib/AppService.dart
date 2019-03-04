@@ -1,10 +1,15 @@
 import 'package:flutter/services.dart';
 
-class AppService {
-  static const MethodChannel _channel = const MethodChannel('mini_program/AppService');
+class JSRuntime {
+  static const MethodChannel _channel =
+      const MethodChannel('mini_program/JSRuntime');
+
+  static Future<String> evaluateJavascript(String script) async {
+    Map<String, dynamic> params = <String, dynamic>{'script': script};
+    return await _channel.invokeMethod('evaluateJavascript', params);
+  }
 
   static Future<String> invokeMethod(String name, List arguments) async {
-    var result = await _channel.invokeMethod('invokeMethod');
-    print(name + result);
+    return await _channel.invokeMethod('invokeMethod');
   }
 }

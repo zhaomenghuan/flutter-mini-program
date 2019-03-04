@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stetho/flutter_stetho.dart';
+
 import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program_example/src/button.dart';
@@ -6,12 +8,14 @@ import 'package:flutter_mini_program_example/src/checkbox.dart';
 import 'package:flutter_mini_program_example/src/icon.dart';
 import 'package:flutter_mini_program_example/src/image.dart';
 import 'package:flutter_mini_program_example/src/index.dart';
+import 'package:flutter_mini_program_example/src/jsapi.dart';
 import 'package:flutter_mini_program_example/src/switch.dart';
 import 'package:flutter_mini_program_example/src/text.dart';
 import 'package:flutter_mini_program_example/src/video.dart';
 import 'package:flutter_mini_program_example/src/view.dart';
 
 void main() {
+  Stetho.initialize();
   runApp(MiniProgramApp());
 }
 
@@ -21,8 +25,9 @@ class MiniProgramApp extends StatefulWidget {
 }
 
 class MiniProgramAppState extends State<MiniProgramApp> {
-  MiniProgramAppState() {
-    App.init({
+  @override
+  Widget build(BuildContext context) {
+    App.init(context, routes: {
       // Home
       "/": IndexPage(url: 'assets/page/index.html'),
       // View
@@ -46,12 +51,13 @@ class MiniProgramAppState extends State<MiniProgramApp> {
       // Video
       "/video": VideoPage(url: 'assets/page/video.html'),
       // WebView
-      "/webview": Page(url: 'assets/page/webview.html')
+      "/webview": Page(url: 'assets/page/webview.html'),
+      // JS_API
+      "/jsapi": JSAPIPage(url: 'assets/page/jsapi.html')
     });
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(onGenerateRoute: App.router.generator);
+    return MaterialApp(
+        onGenerateRoute: App.router.generator,
+        debugShowCheckedModeBanner: false);
   }
 }

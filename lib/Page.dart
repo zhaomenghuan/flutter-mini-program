@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mini_program/AppService.dart';
 import 'package:flutter_mini_program/EventEmitter.dart';
 import 'package:flutter_mini_program/PageParser.dart';
 import 'package:flutter_mini_program/utils/ConvertUtil.dart';
@@ -45,7 +44,6 @@ class Page extends StatefulWidget {
       String name = methodMap['name'];
       List arguments = methodMap['arguments'];
       if (methods != null && methods.containsKey(name)) {
-        AppService.invokeMethod(name, arguments);
         Function callback = methods[name];
         Function.apply(callback, arguments);
       }
@@ -79,8 +77,7 @@ class PageState extends State<Page> {
 
   void parseContent() async {
     try {
-      widget.content =
-          await ResourceUtil.loadStringFromAssetFile(context, widget.url);
+      widget.content = await ResourceUtil.loadStringFromAssetFile(context, widget.url);
       setState(() {
         widget.view = PageParser.parse(widget.content, widget);
       });

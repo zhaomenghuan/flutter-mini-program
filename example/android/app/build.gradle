@@ -32,7 +32,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "cn.com.agree.flutter.flutterminiprogramexample"
+        applicationId "cn.com.agree.flutter.miniprogram.example"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode flutterVersionCode.toInteger()

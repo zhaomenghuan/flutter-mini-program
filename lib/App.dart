@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class App {
   static Router router;
 
-  static init(routes) {
+  static init(BuildContext context, {routes}) {
+    // Router
     var router = new Router();
 
     // 404
@@ -23,7 +24,6 @@ class App {
     App.router = router;
   }
 
-  // 保留当前页面，跳转到应用内的某个页面
   static navigateTo(BuildContext context, String path) {
     App.router
         .navigateTo(context, path, transition: TransitionType.inFromRight);

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:weui/weui.dart';
 
 /// Builds a icon from a <button> tag.
 class ButtonTag extends StatelessWidget {
@@ -16,60 +19,43 @@ class ButtonTag extends StatelessWidget {
 
     String text = element.text;
     var attributes = element.attributes;
+    WeButtonType theme = WeButtonType.acquiescent;
+    WeButtonSize size = WeButtonSize.acquiescent;
+    bool disabled = false;
+    bool loading = false;
+    bool plain = false;
     var onTap = attributes['ontap'];
 
     switch (attributes['type']) {
-      case 'close':
-        return new CloseButton();
-      case 'back':
-        return new BackButton();
-      case 'floating-action':
-        return new FloatingActionButton(onPressed: () {
-          page.invoke(onTap);
-        });
+      case 'primary':
+        theme = WeButtonType.primary;
         break;
-      case 'icon':
-        return new IconButton(
-            icon: Icon(Icons.ac_unit),
-            tooltip: text,
-            onPressed: () {
-              page.invoke(onTap);
-            });
+      case 'warn':
+        theme = WeButtonType.warn;
         break;
-      case 'raised':
-        return new RaisedButton(
-            textColor: Colors.white,
-            color: Colors.blue,
-            splashColor: Colors.blueGrey,
-            child: new Text(text),
-            onPressed: () {
-              page.invoke(onTap);
-            });
-      case 'flat':
-        return new FlatButton(
-            textColor: Colors.white,
-            color: Colors.blue,
-            child: new Text(text),
-            onPressed: () {
-              page.invoke(onTap);
-            });
+      default:
+        theme = WeButtonType.acquiescent;
         break;
-      case 'outline':
-        return new OutlineButton(
-            textColor: Colors.white,
-            color: Colors.blue,
-            splashColor: Colors.blueGrey,
-            child: new Text(text),
-            onPressed: () {
-              page.invoke(onTap);
-            });
-        break;
-      case 'raw-material':
-        return new RawMaterialButton(
-            child: new Text(text),
-            onPressed: () {
-              page.invoke(onTap);
-            });
     }
+
+    if (attributes['size'] == 'mini') {
+      size = WeButtonSize.mini;
+    }
+
+    if (attributes['disabled'] == 'true') {
+      disabled = true;
+    }
+
+    if(attributes['loading'] == 'true') {
+      loading = true;
+    }
+
+    if(attributes['plain'] == 'true') {
+      plain = true;
+    }
+
+    return WeButton(text, theme: theme, disabled: disabled, loading: loading, hollow: plain, size: size, onClick: () {
+      page.invoke(onTap);
+    });
   }
 }
