@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program/AppService.dart';
+import 'package:flutter_mini_program/engine/JSContext.dart';
 
 class JSAPIPage extends Page {
   String url;
@@ -15,10 +15,31 @@ class JSAPIPage extends Page {
 
   Map<String, Function> get methods => {
     "onEvaluateJavascript": () async {
-      print("evaluateJavascript: ");
-      var result = await JSRuntime.evaluateJavascript("window.Math.abs(-4)");
-      print(result);
-      await JSRuntime.evaluateJavascript("window.fmp.showToast('1')");
+      JSContext jsContext = new JSContext();
+      const code = """
+        // Attached as a property of the current global context scope.
+        var obj = {
+          number: 1,
+          string: 'string',
+          date: new Date(),
+          array: [1, 'string', null, undefined],
+          func: function () {}
+        };
+        var a = 10;
+        // Is a variable, and not attached as a property of the context.
+        let objLet = { number: 1, yayForLet: true };
+        """;
+      await jsContext.evaluateScript(code);
+
+      jsContext.setProperty("log", (String message) async {
+        print("[log] $message");
+      });
+      await jsContext.evaluateScript("log(JSON.stringify(obj))");
+
+      print("******************************");
+      var obj = await jsContext.property("obj");
+      print("obj = $obj");
+      print("******************************");
     },
     "invokeMethod": () async {
       print("invokeMethod: ");

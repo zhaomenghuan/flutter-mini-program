@@ -6,11 +6,24 @@
 
 <template>
     <view class="container">
+        <text>默认</text>
         <view>
-            <switch checked="false" onChange="switchChange"/>
+            <switch onchange="switchChange"/>
         </view>
+
+        <text>自定义大小</text>
         <view>
-            <switch checked="true" onChange="switchChange" color="#ff0000"/>
+            <switch size="20.0" onChange="switchChange"/>
+        </view>
+
+        <text>自定义颜色</text>
+        <view>
+            <switch color="#ff0000" onChange="switchChange"/>
+        </view>
+
+        <text>禁用</text>
+        <view>
+            <switch checked="true" disabled="true" onChange="switchChange"/>
         </view>
 
         <h3> style 属性支持</h3>
@@ -26,9 +39,19 @@
                 <td>是否选中</td>
             </tr>
             <tr>
+                <td>disabled</td>
+                <td>Boolean</td>
+                <td>禁用状态</td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>double</td>
+                <td>自定义大小</td>
+            </tr>
+            <tr>
                 <td>color</td>
                 <td>String</td>
-                <td>组件颜色</td>
+                <td>自定义颜色</td>
             </tr>
             <tr>
                 <td>onChange</td>
@@ -40,7 +63,7 @@
 </template>
 
 <style>
-    .container {
-        padding: 10px;
-    }
+.container {
+    padding: 10px;
+}
 </style>

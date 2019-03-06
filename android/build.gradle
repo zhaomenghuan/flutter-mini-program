@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
@@ -15,13 +16,14 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 16
@@ -30,10 +32,14 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    android {
-        compileOptions {
-            sourceCompatibility 1.8
-            targetCompatibility 1.8
-        }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
+}
+
+dependencies {
+    implementation 'com.android.support:support-annotations:27.+'
+    implementation 'com.android.support:support-v4:27.+'
+    implementation 'com.github.LiquidPlayer:LiquidCore:0.6.0'
 }

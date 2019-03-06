@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:toast/toast.dart';
 
 class SwitchPage extends Page {
   String url;
@@ -14,7 +13,7 @@ class SwitchPage extends Page {
 
   Map<String, Function> get methods => {
     "switchChange": (bool checked) {
-      Toast.show("switchChange 事件，值: $checked", duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+//      Toast.show("switchChange 事件，值: $checked", duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
     }
   };
 }

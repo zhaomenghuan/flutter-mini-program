@@ -118,7 +118,7 @@ class IndexPage extends Page {
 
 ### 支持的组件
 
-- view/div: 视图容器
+- view: 视图容器
 - icon: 图标
 - text: 文本
 - br: 换行符
@@ -149,6 +149,16 @@ API
 | style |  String |  | 内联样式 |
 | onTap | EventHandle |  | 点击事件 |
 | onLongTap | EventHandle |  | 长按事件 |
+
+### 按钮
+
+| 属性名   |      类型      |  默认值 | 描述 |
+|----------|:-------------:|------:|:-------------:|
+| size |  String | default | 按钮的大小 |
+| type |  String | default | 按钮的样式类型 |
+| plain |  Boolean | false | 按钮是否镂空，背景色透明 |
+| disabled |  Boolean | false | 是否禁用 |
+| loading |  Boolean | false | 名称前是否带 loading 图标 |
 
 ### 文本输入框
 

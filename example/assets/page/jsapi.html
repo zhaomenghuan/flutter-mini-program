@@ -6,11 +6,11 @@
 
 <template>
     <view class="container">
-        <view>
-            <button type="flat" onTap="onEvaluateJavascript">evaluateJavascript</button>
+        <view class="m-10">
+            <button type="primary" onTap="onEvaluateJavascript">evaluateJavascript</button>
         </view>
-        <view>
-            <button type="flat" onTap="invokeMethod">invokeMethod</button>
+        <view class="m-10">
+            <button type="primary" onTap="invokeMethod">invokeMethod</button>
         </view>
     </view>
 </template>
@@ -26,5 +26,8 @@ Page({
 <style>
 .container {
     padding: 10px;
+}
+.m-10 {
+    margin: 10px;
 }
 </style>

@@ -3,6 +3,7 @@ import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/StyleParser.dart';
 import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:weui/weui.dart';
 
 /// Creates a line break from a template <checkbox> tag.
 class SwitchTag extends StatefulWidget {
@@ -36,9 +37,21 @@ class SwitchTagState extends State<SwitchTag> {
   @override
   Widget build(BuildContext context) {
     assert(widget.element.localName == 'switch');
-    var color = widget.element.attributes['color'];
-    Color activeColor = color != null ? StyleParser.parseColor(color) : null;
-    return CupertinoSwitch(
-        value: _isChecked, onChanged: onChange, activeColor: activeColor);
+    var attributes = widget.element.attributes;
+    var _color = attributes['color'];
+    var _size = attributes['size'];
+    var _disabled = attributes['disabled'];
+
+    Color color = _color != null ? StyleParser.parseColor(_color) : Color(0xff1AAD19);
+    double size = _size != null ? ConvertUtil.parseValue(_size) : 28.0;
+    bool disabled =
+        _disabled != null ? ConvertUtil.parseValue(_disabled) : false;
+
+    return WeSwitch(
+        checked: _isChecked,
+        color: color,
+        size: size,
+        disabled: disabled,
+        onChange: onChange);
   }
 }
