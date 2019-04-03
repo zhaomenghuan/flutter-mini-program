@@ -1,9 +1,3 @@
-<config>
-{
-    "navigationBarTitleText": "Flutter MiniProgram"
-}
-</config>
-
 <template>
     <list-view>
         <list-item x-for="item in list" title="View" subtitle="视图容器" link="/view" onTap="openPage('/view')"></list-item>
@@ -20,3 +14,11 @@
         <list-item title="JS_API" subtitle="JS API" link="/jsapi" onTap="openPage('/jsapi')"></list-item>
     </list-view>
 </template>
+
+<script>
+Page({
+    config: {
+        "navigationBarTitleText": "Flutter MiniProgram"
+    }
+});
+</script>

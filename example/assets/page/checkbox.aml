@@ -1,9 +1,3 @@
-<config>
-    {
-    "navigationBarTitleText": "Flutter 小程序 - Checkbox"
-    }
-</config>
-
 <template>
     <view>
         <checkbox-group change="checkboxChange">
@@ -18,3 +12,11 @@
         </checkbox-group>
     </view>
 </template>
+
+<script>
+Page({
+    config: {
+        "navigationBarTitleText": "Flutter 小程序 - Checkbox"
+    }
+});
+</script>

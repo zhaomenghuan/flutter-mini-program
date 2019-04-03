@@ -40,9 +40,6 @@ class JSAPIPage extends Page {
       var obj = await jsContext.property("obj");
       print("obj = $obj");
       print("******************************");
-    },
-    "invokeMethod": () async {
-      print("invokeMethod: ");
     }
   };
 }

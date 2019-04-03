@@ -3,7 +3,7 @@ import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/StyleParser.dart';
 import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:weui/weui.dart';
+import 'package:flutter_mini_program/components/ui.dart';
 
 /// Creates a line break from a template <checkbox> tag.
 class SwitchTag extends StatefulWidget {
@@ -47,7 +47,7 @@ class SwitchTagState extends State<SwitchTag> {
     bool disabled =
         _disabled != null ? ConvertUtil.parseValue(_disabled) : false;
 
-    return WeSwitch(
+    return UISwitch(
         checked: _isChecked,
         color: color,
         size: size,

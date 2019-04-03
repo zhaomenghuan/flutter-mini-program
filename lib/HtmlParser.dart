@@ -22,8 +22,9 @@ import 'package:html/dom.dart' as dom;
 
 class HtmlParser {
   /// Parse HTML File
-  dom.Document parseHTML(String html) {
-    return parse(html);
+  dom.Element parseHTML(String html) {
+    dom.Document document = parse(html);
+    return document.body;
   }
 
   /// Parse Node Element

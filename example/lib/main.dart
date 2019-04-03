@@ -3,16 +3,7 @@ import 'package:flutter_stetho/flutter_stetho.dart';
 
 import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program_example/src/button.dart';
-import 'package:flutter_mini_program_example/src/checkbox.dart';
-import 'package:flutter_mini_program_example/src/icon.dart';
-import 'package:flutter_mini_program_example/src/image.dart';
 import 'package:flutter_mini_program_example/src/index.dart';
-import 'package:flutter_mini_program_example/src/jsapi.dart';
-import 'package:flutter_mini_program_example/src/switch.dart';
-import 'package:flutter_mini_program_example/src/text.dart';
-import 'package:flutter_mini_program_example/src/video.dart';
-import 'package:flutter_mini_program_example/src/view.dart';
 
 void main() {
   Stetho.initialize();
@@ -29,35 +20,35 @@ class MiniProgramAppState extends State<MiniProgramApp> {
   Widget build(BuildContext context) {
     App.init(context, routes: {
       // Home
-      "/": IndexPage(url: 'assets/page/index.html'),
+      "/": IndexPage(url: 'assets/page/index.aml'),
       // View
-      "/view": ViewPage(url: 'assets/page/view.html'),
+      "/view": Page(url: 'assets/page/view.aml'),
       // Icon
-      "/icon": IconPage(url: 'assets/page/icon.html'),
+      "/icon": Page(url: 'assets/page/icon.aml'),
       // Text
-      "/text": TextPage(url: 'assets/page/text.html'),
+      "/text": Page(url: 'assets/page/text.aml'),
       // Button
-      "/button": ButtonPage(url: 'assets/page/button.html'),
+      "/button": Page(url: 'assets/page/button.aml'),
       // Input
-      "/input": Page(url: 'assets/page/input.html'),
+      "/input": Page(url: 'assets/page/input.aml'),
       // Checkbox
-      "/checkbox": CheckboxPage(url: 'assets/page/checkbox.html'),
+      "/checkbox": Page(url: 'assets/page/checkbox.aml'),
       // Switch
-      "/switch": SwitchPage(url: 'assets/page/switch.html'),
+      "/switch": Page(url: 'assets/page/switch.aml'),
       // Slider
-      "/slider": Page(url: 'assets/page/slider.html'),
+      "/slider": Page(url: 'assets/page/slider.aml'),
       // Image
-      "/image": ImagePage(url: 'assets/page/image.html'),
+      "/image": Page(url: 'assets/page/image.aml'),
       // Video
-      "/video": VideoPage(url: 'assets/page/video.html'),
+      "/video": Page(url: 'assets/page/video.aml'),
       // WebView
-      "/webview": Page(url: 'assets/page/webview.html'),
+      "/webview": Page(url: 'assets/page/webview.aml'),
       // JS_API
-      "/jsapi": JSAPIPage(url: 'assets/page/jsapi.html')
+      "/jsapi": Page(url: 'assets/page/jsapi.aml')
     });
 
     return MaterialApp(
         onGenerateRoute: App.router.generator,
-        debugShowCheckedModeBanner: false);
+        debugShowCheckedModeBanner: true);
   }
 }

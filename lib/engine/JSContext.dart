@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 const NAMESPACE = "io.jojodev.flutter.liquidcore";
 
 /// This enables more verbose logging, if desired.
-bool enableLiquidCoreLogging = false;
+bool enableLiquidCoreLogging = true;
 
 void liquidcoreLog(String message) {
   if (enableLiquidCoreLogging) {

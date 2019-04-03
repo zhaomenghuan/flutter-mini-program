@@ -11,13 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import cn.com.agree.flutter.miniprogram.handler.JsContextHandler;
-import cn.com.agree.flutter.miniprogram.handler.MicroServiceHandler;
 import io.flutter.plugin.common.JSONUtil;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-/**
- * LiquidcorePlugin
- */
 public class MiniProgramPlugin {
     public final static String NAMESPACE = "io.jojodev.flutter.liquidcore";
 
@@ -26,7 +22,6 @@ public class MiniProgramPlugin {
      */
     public static void registerWith(Registrar registrar) {
         JsContextHandler.registerWith(registrar);
-        MicroServiceHandler.registerWith(registrar);
     }
 
     /**

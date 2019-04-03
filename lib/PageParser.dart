@@ -1,22 +1,16 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/HtmlParser.dart';
 import 'package:flutter_mini_program/StyleParser.dart';
+import 'package:flutter_mini_program/engine/JSContext.dart';
 import 'package:html/dom.dart' as dom;
 
 class PageParser {
   /// Parse HTML Page
-  static Widget parse(String html, Page page) {
+  static Page parse(Page page) {
     List<Widget> widgetList = new List();
     HtmlParser htmlParser = new HtmlParser();
-    dom.Document document = htmlParser.parseHTML(html);
-    dom.Element docBody = document.body;
-
-    // config
-    dom.Node configNode = docBody.getElementsByTagName("config").first;
-    page.config = json.decode(configNode.text);
+    dom.Element docBody = htmlParser.parseHTML(page.html);
 
     // style
     List<dom.Element> styleElements = docBody.getElementsByTagName("style");
@@ -32,24 +26,25 @@ class PageParser {
     if (templateChildren.length > 0) {
       templateChildren.forEach(
           (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
+      page.widgetList = widgetList;
     }
 
     // script
     List<dom.Element> scriptElements = docBody.getElementsByTagName("script");
     if (scriptElements.length > 0) {
       dom.Element scriptElement = scriptElements.first;
-      page.registerPageLogic(scriptElement.text.trim());
+      page.jsContext.setProperty("Page", (Map options) {
+        page.config = options['config'];
+        page.data = options['data'];
+      });
+      registerPageLogic(page.jsContext, scriptElement.text.trim());
     }
 
-    // Title
-    String title = "";
-    if (page.config != null) {
-      if (page.config.containsKey("navigationBarTitleText")) {
-        title = page.config['navigationBarTitleText'];
-      }
-    }
-    return new Scaffold(
-        appBar: AppBar(title: Text(title), centerTitle: true),
-        body: SingleChildScrollView(child: Wrap(children: widgetList)));
+    return page;
+  }
+
+  // Register Page Logic
+  static void registerPageLogic(JSContext jsContext, String script) async {
+    await jsContext.evaluateScript(script);
   }
 }

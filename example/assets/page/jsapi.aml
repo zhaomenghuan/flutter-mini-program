@@ -1,24 +1,27 @@
-<config>
-    {
-    "navigationBarTitleText": "Flutter MiniProgram - JS-API"
-    }
-</config>
-
 <template>
     <view class="container">
+        <text>{{message}}</text>
         <view class="m-10">
             <button type="primary" onTap="onEvaluateJavascript">evaluateJavascript</button>
-        </view>
-        <view class="m-10">
-            <button type="primary" onTap="invokeMethod">invokeMethod</button>
         </view>
     </view>
 </template>
 
 <script>
 Page({
-    onEvaluateJavascript: function() {
+    config: {
+        "navigationBarTitleText": "Flutter MiniProgram - JS-API"
+    },
+    data: {
+        message: "Hello Flutter's MiniProgram"
+    },
+    onLoad() {
 
+    },
+    methods: {
+        onEvaluateJavascript: function() {
+            log('onEvaluateJavascript');
+        }
     }
 });
 </script>

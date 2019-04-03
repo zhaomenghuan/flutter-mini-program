@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:weui/weui.dart';
+import 'package:flutter_mini_program/components/ui.dart';
 
 /// Builds a icon from a <button> tag.
 class ButtonTag extends StatelessWidget {
@@ -19,8 +19,8 @@ class ButtonTag extends StatelessWidget {
 
     String text = element.text;
     var attributes = element.attributes;
-    WeButtonType theme = WeButtonType.acquiescent;
-    WeButtonSize size = WeButtonSize.acquiescent;
+    UIButtonType theme = UIButtonType.acquiescent;
+    UIButtonSize size = UIButtonSize.acquiescent;
     bool disabled = false;
     bool loading = false;
     bool plain = false;
@@ -28,18 +28,18 @@ class ButtonTag extends StatelessWidget {
 
     switch (attributes['type']) {
       case 'primary':
-        theme = WeButtonType.primary;
+        theme = UIButtonType.primary;
         break;
       case 'warn':
-        theme = WeButtonType.warn;
+        theme = UIButtonType.warn;
         break;
       default:
-        theme = WeButtonType.acquiescent;
+        theme = UIButtonType.acquiescent;
         break;
     }
 
     if (attributes['size'] == 'mini') {
-      size = WeButtonSize.mini;
+      size = UIButtonSize.mini;
     }
 
     if (attributes['disabled'] == 'true') {
@@ -54,7 +54,7 @@ class ButtonTag extends StatelessWidget {
       plain = true;
     }
 
-    return WeButton(text, theme: theme, disabled: disabled, loading: loading, hollow: plain, size: size, onClick: () {
+    return UIButton(text, theme: theme, disabled: disabled, loading: loading, hollow: plain, size: size, onClick: () {
       page.invoke(onTap);
     });
   }

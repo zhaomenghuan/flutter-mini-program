@@ -1,5 +1,21 @@
 {
+  "pages": [
+    "page/button.aml",
+    "page/jsapi.aml"
+  ],
   "window": {
     "navigationBarTitleText": "Flutter 小程序"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/ui/index",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/api/index",
+        "text": "接口"
+      }
+    ]
   }
 }

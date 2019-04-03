@@ -30,6 +30,7 @@ class TextTag extends StatelessWidget {
         textAlign: style['textAlign'],
         textDirection: style['direction'],
         overflow: TextOverflow.clip);
+
     if (style['display'] == 'block') {
       return Row(
         children: <Widget>[textWidget],

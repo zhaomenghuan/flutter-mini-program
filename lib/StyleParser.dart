@@ -228,13 +228,17 @@ class StyleParser {
 
   /// Parse Color
   static parseColor(String value) {
-    Color color;
-    RegExp colorRegExp = new RegExp(r'^#([a-fA-F0-9]{6})$');
-    if (colorRegExp.hasMatch(value)) {
-      value = value.replaceAll('#', '').trim();
-      color = new Color(int.parse('0xFF' + value));
+    var colorHex = 0xff000000;
+    if (value.length == 7) {
+      colorHex = int.parse(value.replaceAll(r"#", "0xff"));
+    } else if (value.length == 9) {
+      colorHex = int.parse(value.replaceAll(r"#", "0x"));
+    } else if (value.length == 4) {
+      value = value.replaceFirst(r"#", "");
+      value = value.split("").map((c) => "$c$c").join();
+      colorHex = int.parse("0xff$value");
     }
-    return color;
+    return new Color(colorHex);
   }
 
   /// Parse Size

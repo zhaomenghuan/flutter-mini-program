@@ -11,7 +11,7 @@ class IndexPage extends Page {
   @override
   void onCreate(BuildContext context, Page page) {
     mContext = context;
-    print(page);
+//    print(page);
 //    print(page.emitter);
 //    print(page.view);
 //    print(Application.router);

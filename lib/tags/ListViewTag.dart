@@ -42,15 +42,14 @@ class ListViewTagState extends State<ListViewTag> {
         shrinkWrap: true,
         itemCount: data.length,
         itemBuilder: (context, index) => new ListTile(
-              title: new Text('${data[index]["title"]}',
-                  maxLines: 2, overflow: TextOverflow.ellipsis),
-              subtitle: new Text('${data[index]["subtitle"]}'),
-              onTap: () {
-                widget.page.invoke(data[index]["onTap"]);
-              },
-              onLongPress: () {
-                widget.page.invoke(data[index]["onLongTap"]);
-              },
-            ));
+          title: new Text('${data[index]["title"]}', maxLines: 2, overflow: TextOverflow.ellipsis),
+          subtitle: new Text('${data[index]["subtitle"]}'),
+          onTap: () {
+            widget.page.invoke(data[index]["onTap"]);
+          },
+          onLongPress: () {
+            widget.page.invoke(data[index]["onLongTap"]);
+          },
+        ));
   }
 }

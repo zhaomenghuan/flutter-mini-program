@@ -141,7 +141,7 @@ class IndexPage extends Page {
 
 视图容器，相当于 Web 的 div 标签或者 React Native 的 View 组件。
 
-API
+#### API
 
 | 属性名   |      类型      |  默认值 | 描述 |
 |----------|:-------------:|------:|:-------------:|
@@ -150,7 +150,11 @@ API
 | onTap | EventHandle |  | 点击事件 |
 | onLongTap | EventHandle |  | 长按事件 |
 
-### 按钮
+### Button
+
+按钮。
+
+#### API
 
 | 属性名   |      类型      |  默认值 | 描述 |
 |----------|:-------------:|------:|:-------------:|
@@ -159,6 +163,81 @@ API
 | plain |  Boolean | false | 按钮是否镂空，背景色透明 |
 | disabled |  Boolean | false | 是否禁用 |
 | loading |  Boolean | false | 名称前是否带 loading 图标 |
+
+#### 示例
+
+```html
+<view class="container">
+    <text>按钮</text>
+    <view class="mb-10">
+        <button type="default" ontap="">default</button>
+    </view>
+    <view class="mb-10">
+        <button type="primary">primary</button>
+    </view>
+    <view class="mb-10">
+        <button type="warn">warn</button>
+    </view>
+
+    <text>disabled 状态</text>
+    <view class="mb-10">
+        <button type="default" disabled="true">default</button>
+    </view>
+    <view class="mb-10">
+        <button type="primary" disabled="true">primary</button>
+    </view>
+    <view class="mb-10">
+        <button type="warn" disabled="true">warn</button>
+    </view>
+
+    <text>loading 状态</text>
+    <view class="mb-10">
+        <button type="default" loading="true">default</button>
+    </view>
+    <view class="mb-10">
+        <button type="primary" loading="true">primary</button>
+    </view>
+    <view class="mb-10">
+        <button type="warn" loading="true">warn</button>
+    </view>
+
+    <text>plain 状态</text>
+    <view class="mb-10">
+        <button type="default" plain="true">default</button>
+    </view>
+    <view class="mb-10">
+        <button type="primary" plain="true">primary</button>
+    </view>
+    <view class="mb-10">
+        <button type="warn" plain="true">warn</button>
+    </view>
+
+    <text>按钮大小</text>
+    <view class="mb-10">
+        <button type="default" size="mini">default</button>
+    </view>
+    <view class="mb-10">
+        <button type="primary" size="mini">primary</button>
+    </view>
+    <view class="mb-10">
+        <button type="warn" size="mini">warn</button>
+    </view>
+</view>
+```
+
+### Switch
+
+开关选择器。
+
+#### API
+
+| 属性名   |      类型      |  默认值 | 描述 |
+|----------|:-------------:|------:|:-------------:|
+| checked | Boolean |  | 是否选中 |
+| disabled | Boolean |  | 禁用状态 |
+| size | double |   | 自定义大小 |
+| color | String |   | 自定义颜色 |
+| onChange | EventHandle |   | checked 改变时触发 |
 
 ### 文本输入框
 

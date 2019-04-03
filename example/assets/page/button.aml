@@ -1,14 +1,8 @@
-<config>
-{
-    "navigationBarTitleText": "Flutter 小程序 - Button"
-}
-</config>
-
 <template>
     <view class="container">
         <text>按钮</text>
         <view class="mb-10">
-            <button type="default" ontap="">default</button>
+            <button type="default">default</button>
         </view>
         <view class="mb-10">
             <button type="primary">primary</button>
@@ -65,7 +59,12 @@
 
 <script>
 Page({
+    config: {
+        "navigationBarTitleText": "Flutter 小程序 - Button"
+    },
+    data: {
 
+    }
 });
 </script>
 
