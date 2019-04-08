@@ -2,13 +2,13 @@
 
 # Flutter MiniProgram
 
-A Flutter's mini-program development framework by parsing HTML and CSS. This Project is inspired by [FlutterHtmlView](https://github.com/PonnamKarthik/FlutterHtmlView).
+A Flutter's mini-program development framework by parsing HTML、CSS and JS / Dart. This Project is inspired by [FlutterHtmlView](https://github.com/PonnamKarthik/FlutterHtmlView).
 
 ## Features
 
 - Convert html tags to flutter widgets
 - Support use css to rendering flutter widgets
-- Support template compile and data binding. (TODO)
+- Support template compile and data binding
 
 ## Framework
 
