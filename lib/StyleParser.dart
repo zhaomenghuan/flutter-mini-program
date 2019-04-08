@@ -1,15 +1,13 @@
+import 'package:csslib/parser.dart' as css;
+import 'package:csslib/visitor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
-import 'package:csslib/parser.dart' as css;
-import 'package:csslib/visitor.dart';
 
 class StyleParser {
-  /**
-   * Spin-up CSS parser in checked mode to detect any problematic CSS.  Normally,
-   * CSS will allow any property/value pairs regardless of validity; all of our
-   * tests (by default) will ensure that the CSS is really valid.
-   */
+  /// Spin-up CSS parser in checked mode to detect any problematic CSS.  Normally,
+  /// CSS will allow any property/value pairs regardless of validity; all of our
+  /// tests (by default) will ensure that the CSS is really valid.
   static StyleSheet parseCss(String cssInput,
           {List<css.Message> errors, css.PreprocessorOptions opts}) =>
       css.parse(cssInput,

@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 const NAMESPACE = "io.jojodev.flutter.liquidcore";
 
 /// This enables more verbose logging, if desired.
-bool enableLiquidCoreLogging = true;
+bool enableLiquidCoreLogging = false;
 
 void liquidcoreLog(String message) {
   if (enableLiquidCoreLogging) {
@@ -45,14 +45,14 @@ class JSContext {
   static const JSPropertyAttributeDontDelete = 1 << 3;
 
   static final MethodChannel _methodChannel =
-  const MethodChannel('$NAMESPACE/jscontext')
-    ..setMethodCallHandler(_platformCallHandler);
+      const MethodChannel('$NAMESPACE/jscontext')
+        ..setMethodCallHandler(_platformCallHandler);
 
   static final _uuid = new Uuid();
   static final _instances = new Map<String, JSContext>();
 
   final EventChannel _jsContextExceptionChannel =
-  const EventChannel("$NAMESPACE/jscontextException");
+      const EventChannel("$NAMESPACE/jscontextException");
 
   StreamSubscription _jsContextExceptionSubscription;
 
@@ -143,10 +143,10 @@ class JSContext {
       // Listen to the exception event stream.
       _jsContextExceptionSubscription =
           _jsContextExceptionChannel.receiveBroadcastStream().listen((error) {
-            if (_exceptionHandler != null) {
-              _exceptionHandler(error);
-            }
-          });
+        if (_exceptionHandler != null) {
+          _exceptionHandler(error);
+        }
+      });
     }
 
     return _invokeMethod("setExceptionHandler", {});
@@ -203,7 +203,7 @@ class JSContext {
         var func = instance._jsFunctions[functionId];
         if (func != null) {
           var decodedArgs =
-          args.map((arg) => instance._transformValue(arg)).toList();
+              args.map((arg) => instance._transformValue(arg)).toList();
           return Function.apply(func, decodedArgs);
         }
         break;

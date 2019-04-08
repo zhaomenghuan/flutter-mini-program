@@ -1,5 +1,5 @@
 name: flutter_mini_program
-description: A Flutter UI Framework by using HTML + CSS + Dart，is for developing mini-program.
+description: A Flutter's mini-program development framework by parsing HTML and CSS.
 version: 0.0.1
 author: zhaomenghuan <zhaomenghuan@agree.com.cn>
 homepage: https://github.com/zhaomenghuan/flutter-mini-program
@@ -11,10 +11,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  html: ^0.13.3+3
+  html: ^0.13.4+1
   csslib: ^0.14.6
-  fluro: "^1.4.0"
-  cached_network_image: "^0.5.0+1"
+  fluro: ^1.4.0
+  cached_network_image: ^0.5.0+1
   video_player: ^0.8.0
   # https://pub.dartlang.org/packages/webview_flutter
   webview_flutter: ^0.1.2

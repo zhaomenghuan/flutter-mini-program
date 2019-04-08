@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mini_program/Page.dart';
+import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/HtmlParser.dart';
+import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/StyleParser.dart';
-import 'package:flutter_mini_program/engine/JSContext.dart';
 import 'package:html/dom.dart' as dom;
 
 class PageParser {
   /// Parse HTML Page
-  static Page parse(Page page) {
+  static Future<Page> parse(Page page) async {
     List<Widget> widgetList = new List();
     HtmlParser htmlParser = new HtmlParser();
     dom.Element docBody = htmlParser.parseHTML(page.html);
@@ -25,7 +25,7 @@ class PageParser {
     List<dom.Node> templateChildren = templateElement.children;
     if (templateChildren.length > 0) {
       templateChildren.forEach(
-          (dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
+          (dom.Node node) => widgetList.add(htmlParser.parseTag(page, node)));
       page.widgetList = widgetList;
     }
 
@@ -33,18 +33,22 @@ class PageParser {
     List<dom.Element> scriptElements = docBody.getElementsByTagName("script");
     if (scriptElements.length > 0) {
       dom.Element scriptElement = scriptElements.first;
-      page.jsContext.setProperty("Page", (Map options) {
-        page.config = options['config'];
-        page.data = options['data'];
-      });
-      registerPageLogic(page.jsContext, scriptElement.text.trim());
+      page.jsContext.setProperty("Page", (Map options) {});
+      var global = await registerPageLogic(page.url, scriptElement.text.trim());
+      page.config = global['config'];
+      page.data = global['data'];
+      page.methods = global['methods'];
     }
 
     return page;
   }
 
   // Register Page Logic
-  static void registerPageLogic(JSContext jsContext, String script) async {
-    await jsContext.evaluateScript(script);
+  static dynamic registerPageLogic(String name, String script) async {
+    await App.jsContext.evaluateScript('''
+    pages['$name'] = $script;
+    ''');
+    var pages = await App.jsContext.property("pages");
+    return pages[name];
   }
 }

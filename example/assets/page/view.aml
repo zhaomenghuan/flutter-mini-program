@@ -1,9 +1,3 @@
-<config>
-{
-    "navigationBarTitleText": "Flutter 小程序 - View"
-}
-</config>
-
 <template>
     <view class="container">
         <view alignment="topLeft" onTap="topLeftOnTap" onLongTap="topLeftOnLongTap">
@@ -15,17 +9,14 @@
         <view alignment="topRight">
             <text>topRight</text>
         </view>
-        <view>
-            <text>{{message}}</text>
-        </view>
     </view>
 </template>
 
 <script>
 Page({
-  topLeftOnTap() {
-    alert('1');
-  }
+    config: {
+        "navigationBarTitleText": "Flutter 小程序 - View"
+    }
 });
 </script>
 

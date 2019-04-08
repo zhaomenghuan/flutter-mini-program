@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_stetho/flutter_stetho.dart';
-
 import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/Page.dart';
-import 'package:flutter_mini_program_example/src/index.dart';
 
 void main() {
-  Stetho.initialize();
   runApp(MiniProgramApp());
 }
 
@@ -20,7 +16,7 @@ class MiniProgramAppState extends State<MiniProgramApp> {
   Widget build(BuildContext context) {
     App.init(context, routes: {
       // Home
-      "/": IndexPage(url: 'assets/page/index.aml'),
+      "/": Page(url: 'assets/page/index.aml'),
       // View
       "/view": Page(url: 'assets/page/view.aml'),
       // Icon

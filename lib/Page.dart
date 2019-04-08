@@ -1,16 +1,16 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_mini_program/App.dart';
 import 'package:flutter_mini_program/EventEmitter.dart';
 import 'package:flutter_mini_program/PageParser.dart';
+import 'package:flutter_mini_program/engine/JSContext.dart';
 import 'package:flutter_mini_program/utils/ConvertUtil.dart';
 import 'package:flutter_mini_program/utils/ResourceUtil.dart';
-import 'package:flutter_mini_program/engine/JSContext.dart';
 
 class Page extends StatefulWidget {
   String url;
   EventEmitter emitter;
   Widget view;
+  BuildContext context;
   JSContext jsContext;
 
   List<Widget> widgetList = new List();
@@ -28,7 +28,7 @@ class Page extends StatefulWidget {
   Map data = {};
 
   // Page Methods
-  Map<String, Function> methods = new Map();
+  Map methods = {};
 
   Page({this.url}) {
     emitter = new EventEmitter();
@@ -37,16 +37,32 @@ class Page extends StatefulWidget {
   @override
   PageState createState() => PageState();
 
-  void onCreate(BuildContext context, Page page) async {}
+  void onCreate(BuildContext context, Page page) {
+    this.context = context;
+  }
 
   void invoke(String functionTag) {
     if (functionTag != null) {
       Map methodMap = ConvertUtil.parseFunction(functionTag);
       String name = methodMap['name'];
       List arguments = methodMap['arguments'];
+
+      print('---------------------');
+      print('method: $name');
+      print('arguments: $arguments');
+      print('---------------------');
+
       if (methods != null && methods.containsKey(name)) {
-        Function callback = methods[name];
-        Function.apply(callback, arguments);
+        String callback = methods[name];
+        print(callback);
+        // Function.apply(callback, arguments);
+
+        // TODO: API
+        switch (name) {
+          case 'openPage':
+            App.navigateTo(this.context, arguments[0]);
+            break;
+        }
       }
     }
   }
@@ -72,12 +88,13 @@ class PageState extends State<Page> {
   void parseContent() async {
     try {
       widget.html =
-      await ResourceUtil.loadStringFromAssetFile(context, widget.url);
-      Page page = PageParser.parse(widget);
+          await ResourceUtil.loadStringFromAssetFile(context, widget.url);
+      Page page = await PageParser.parse(widget);
 
       setState(() {
         widget.config = page.config;
         widget.data = page.data;
+        widget.methods = page.methods;
         widget.widgetList = page.widgetList;
       });
     } catch (e) {

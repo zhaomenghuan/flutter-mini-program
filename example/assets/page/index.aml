@@ -19,6 +19,11 @@
 Page({
     config: {
         "navigationBarTitleText": "Flutter MiniProgram"
+    },
+    methods: {
+        openPage: function(path) {
+            log('path: ' + path);
+        }
     }
 });
 </script>

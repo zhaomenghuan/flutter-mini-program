@@ -2,7 +2,7 @@
     <view class="container">
         <text>{{message}}</text>
         <view class="m-10">
-            <button type="primary" onTap="onEvaluateJavascript">evaluateJavascript</button>
+            <button type="primary" onTap="onEvaluateJavascript()">evaluateJavascript</button>
         </view>
     </view>
 </template>

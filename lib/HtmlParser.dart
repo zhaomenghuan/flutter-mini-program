@@ -6,19 +6,18 @@ import 'package:flutter_mini_program/tags/ButtonTag.dart';
 import 'package:flutter_mini_program/tags/CheckboxGroupTag.dart';
 import 'package:flutter_mini_program/tags/HrTag.dart';
 import 'package:flutter_mini_program/tags/IconTag.dart';
+import 'package:flutter_mini_program/tags/ImageTag.dart';
 import 'package:flutter_mini_program/tags/InputTag.dart';
 import 'package:flutter_mini_program/tags/ListViewTag.dart';
 import 'package:flutter_mini_program/tags/SliderTag.dart';
 import 'package:flutter_mini_program/tags/SwitchTag.dart';
 import 'package:flutter_mini_program/tags/TableTag.dart';
 import 'package:flutter_mini_program/tags/TextTag.dart';
-import 'package:flutter_mini_program/tags/ImageTag.dart';
 import 'package:flutter_mini_program/tags/VideoTag.dart';
 import 'package:flutter_mini_program/tags/ViewTag.dart';
 import 'package:flutter_mini_program/tags/WebViewTag.dart';
-
-import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' show parse;
 
 class HtmlParser {
   /// Parse HTML File
@@ -28,12 +27,14 @@ class HtmlParser {
   }
 
   /// Parse Node Element
-  parseChildren(Page page, dom.Node node, widgetList) {
+  parseTag(Page page, dom.Node node) {
+    Widget widget = new Container(height: 0.0, width: 0.0);
+
     if (node is dom.Text) {
       dom.Text text = node as dom.Text;
       String data = text.data.trim();
       if (data.isNotEmpty) {
-        widgetList(new Text(data));
+        widget = new Text(data);
       }
     }
 
@@ -43,8 +44,7 @@ class HtmlParser {
       switch (name) {
         case 'div':
         case 'view':
-          widgetList
-              .add(new ViewTag(page: page, element: node, style: nodeStyles));
+          widget = new ViewTag(page: page, element: node, style: nodeStyles);
           break;
         case 'text':
         case 'p':
@@ -56,66 +56,55 @@ class HtmlParser {
         case 'h5':
         case 'h6':
         case 'a':
-          widgetList
-              .add(new TextTag(page: page, element: node, style: nodeStyles));
+          widget = new TextTag(page: page, element: node, style: nodeStyles);
           break;
         case 'table':
-          widgetList
-              .add(new TableTag(page: page, element: node, style: nodeStyles));
+          widget = new TableTag(page: page, element: node, style: nodeStyles);
           break;
         case 'hr':
-          widgetList
-              .add(new HrTag(page: page, element: node, style: nodeStyles));
+          widget = new HrTag(page: page, element: node, style: nodeStyles);
           break;
         case 'br':
-          widgetList
-              .add(new BreakTag(page: page, element: node, style: nodeStyles));
+          widget = new BreakTag(page: page, element: node, style: nodeStyles);
           break;
         case 'icon':
-          widgetList
-              .add(new IconTag(page: page, element: node, style: nodeStyles));
+          widget = new IconTag(page: page, element: node, style: nodeStyles);
           break;
         case 'input':
-          widgetList
-              .add(new InputTag(page: page, element: node, style: nodeStyles));
+          widget = new InputTag(page: page, element: node, style: nodeStyles);
           break;
         case 'button':
-          widgetList
-              .add(new ButtonTag(page: page, element: node, style: nodeStyles));
+          widget = new ButtonTag(page: page, element: node, style: nodeStyles);
           break;
         case 'checkbox-group':
-          widgetList.add(
-              new CheckboxGroupTag(page: page, element: node, style: nodeStyles));
+          widget = new CheckboxGroupTag(
+              page: page, element: node, style: nodeStyles);
           break;
         case 'switch':
-          widgetList.add(
-              new SwitchTag(page: page, element: node, style: nodeStyles));
+          widget = new SwitchTag(page: page, element: node, style: nodeStyles);
           break;
         case 'slider':
-          widgetList.add(
-              new SliderTag(page: page, element: node, style: nodeStyles));
+          widget = new SliderTag(page: page, element: node, style: nodeStyles);
           break;
         case 'list-view':
-          widgetList.add(
-              new ListViewTag(page: page, element: node, style: nodeStyles));
+          widget =
+              new ListViewTag(page: page, element: node, style: nodeStyles);
           break;
         case 'image':
         case 'img':
-          widgetList
-              .add(new ImageTag(page: page, element: node, style: nodeStyles));
+          widget = new ImageTag(page: page, element: node, style: nodeStyles);
           break;
         case 'video':
-          widgetList
-              .add(new VideoTag(page: page, element: node, style: nodeStyles));
+          widget = new VideoTag(page: page, element: node, style: nodeStyles);
           break;
         case 'web-view':
-          widgetList
-              .add(new WebViewTag(page: page, element: node, style: nodeStyles));
+          widget = new WebViewTag(page: page, element: node, style: nodeStyles);
           break;
         default:
-          node.children
-              .forEach((element) => parseChildren(page, element, widgetList));
+          break;
       }
+
+      return widget;
     }
   }
 }

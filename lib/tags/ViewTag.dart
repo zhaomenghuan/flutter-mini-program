@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mini_program/Page.dart';
 import 'package:flutter_mini_program/HtmlParser.dart';
+import 'package:flutter_mini_program/Page.dart';
 import 'package:html/dom.dart' as dom;
 
 // https://flutter.io/docs/development/ui/widgets/layout
@@ -21,7 +21,8 @@ class ViewTag extends StatelessWidget {
       return new Container(height: 0.0, width: 0.0);
     }
 
-    nodes.forEach((dom.Node node) => htmlParser.parseChildren(page, node, widgetList));
+    nodes.forEach(
+        (dom.Node node) => widgetList.add(htmlParser.parseTag(page, node)));
 
     var attributes = element.attributes;
     var onTap = attributes['ontap'];

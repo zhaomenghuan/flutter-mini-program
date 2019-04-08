@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:path/path.dart' as path;
 
 class ConvertUtil {
@@ -85,13 +86,14 @@ class ConvertUtil {
   }
 
   static String compileTemplateString(String template, Map data) {
-    if (template != null) {
+    if (template != null && data != null) {
       RegExp regExp = new RegExp(r'{{(.+?)}}');
       Iterable<Match> matches = regExp.allMatches(template);
       for (Match match in matches) {
         String origin = match[0];
         String variable = match[1];
-        String value = data.isNotEmpty && variable.isNotEmpty ? data[variable] : "";
+        String value =
+            data.isNotEmpty && variable.isNotEmpty ? data[variable] : "";
         template = template.replaceAll(new RegExp(origin), value);
       }
     }
